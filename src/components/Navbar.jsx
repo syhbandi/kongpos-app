@@ -1,31 +1,42 @@
 import {
   faBars,
   faBell,
+  faCaretDown,
   faEnvelope,
   faSearch,
+  faStoreAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { setOpen, setOpenSm } from "../features/MenuSlice";
 
-export const Navbar = () => {
-  const dispatch = useDispatch();
+export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
   return (
-    <div className="h-20 px-5 bg-white shadow-md flex items-center justify-between sticky top-0">
+    <div
+      className={"h-20 px-5 bg-white shadow-md flex items-center sticky top-0"}
+    >
       <div
-        onClick={() => dispatch(setOpen())}
+        onClick={() => setOpen(!open)}
         className="cursor-pointer hidden md:block"
       >
         <FontAwesomeIcon icon={faBars} className="text-2xl" />
       </div>
       <div
-        onClick={() => dispatch(setOpenSm())}
+        onClick={() => setOpenMobile(!openMobile)}
         className="cursor-pointer md:hidden"
       >
         <FontAwesomeIcon icon={faBars} className="text-2xl" />
       </div>
-      <div>
+      <div
+        className="flex items-center ml-5 cursor-pointer"
+        onClick={() => console.log("button ganti toko")}
+      >
+        <FontAwesomeIcon icon={faStoreAlt} className="mr-3 text-xl" />
+        <div className="text-2xl font-medium mr-3 hidden md:block">
+          Mane mini resto
+        </div>
+        <FontAwesomeIcon icon={faCaretDown} />
+      </div>
+      <div className="ml-auto">
         <ul className="flex items-center space-x-10">
           <li className="relative cursor-pointer">
             <FontAwesomeIcon icon={faSearch} className="text-xl" />

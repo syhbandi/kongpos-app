@@ -1,41 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
 import { Navbar } from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-import { Sidebarsm } from "./components/Sidebarsm";
-import { Dashboard } from "./pages/Dashboard";
-import { Master } from "./pages/Master";
 
 function App() {
-  const { open } = useSelector((state) => state.menu);
-  const user = null;
+  const [open, setOpen] = useState(true);
+  const [openMobile, setOpenMobile] = useState(false);
 
-  if (user) {
-    return <>Belum login</>;
-  } else {
-    return (
-      <BrowserRouter>
-        <div
-          className={`flex flex-col bg-slate-100 duration-300 min-h-screen ${
-            !open ? "md:pl-28" : "md:pl-72"
-          }`}
-        >
-          <Sidebar />
-          <Sidebarsm />
-          <Navbar />
-          <div className="p-5 flex flex-col space-y-5">
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/master" element={<Master />} />
-            </Routes>
-          </div>
-          <Footer />
-        </div>
-      </BrowserRouter>
-    );
-  }
+  return (
+    <div
+      className={`min-h-screen flex flex-col transition-all ease-in-out duration-300 ${
+        !open ? "md:pl-28" : "md:pl-72"
+      }`}
+    >
+      <Navbar
+        open={open}
+        setOpen={setOpen}
+        setOpenMobile={setOpenMobile}
+        openMobile={openMobile}
+      />
+      <Sidebar
+        open={open}
+        openMobile={openMobile}
+        setOpenMobile={setOpenMobile}
+      />
+      <div className="p-5">
+        <Outlet />
+      </div>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

@@ -1,71 +1,91 @@
+import {
+  faClose,
+  faContactBook,
+  faDatabase,
+  faFile,
+  faTachometerAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { setAktif, setSubMenuAktif } from "../features/MenuSlice";
 import logoKongpos from "../assets/logo-kongpos-app.png";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-const Sidebar = () => {
-  const { menus, open, menuAktif } = useSelector((state) => state.menu);
-  const dispatch = useDispatch();
+
+const Sidebar = ({ open, openMobile, setOpenMobile }) => {
+  const [aktif, setAktif] = useState({});
+  const [menus] = useState([
+    { title: "dashboard", link: "/", icon: faTachometerAlt },
+    { title: "master", link: "master", icon: faDatabase },
+    { title: "laporan", link: "laporan", icon: faFile },
+    { title: "kontrak", link: "kontrak", icon: faContactBook },
+  ]);
   const navigate = useNavigate();
+
   useEffect(() => {
-    dispatch(
-      setAktif(menus.find((menu) => menu.link === window.location.pathname))
-    );
-  }, [dispatch, menuAktif, menus]);
+    if (window.location.pathname !== "/") {
+      setAktif(
+        menus.find((menu) => window.location.pathname.slice(1) === menu.link)
+      );
+    } else {
+      setAktif(menus[0]);
+    }
+  }, [menus]);
 
   const navigasiMenu = (menu) => {
-    dispatch(setAktif(menu));
-
-    if (menu.subMenu) {
-      dispatch(setSubMenuAktif(menu));
-      return;
-    }
-
     navigate(menu.link);
+    setAktif(menu);
+    setOpenMobile(false);
   };
-
   return (
     <div
-      className={`${
-        !open ? "w-28 " : "w-72"
-      }  h-screen bg-white shadow-xl duration-300 fixed top-0 -left-full md:left-0 overflow-auto z-auto`}
+      className={`fixed  md:left-0 w-72 h-screen bg-white shadow-xl transition-all ease-in-out duration-300 ${
+        !open ? "md:w-28" : "md:w-72"
+      } ${!openMobile ? "left-[-100vw]" : "left-0"}`}
     >
-      <div className="flex items-center justify-center cursor-pointer py-5 duration-300">
+      {/* title app */}
+      <div
+        className={`h-20 flex items-center ${
+          !open && !openMobile ? "px-5 justify-center" : "px-10"
+        }`}
+      >
         <img
           src={logoKongpos}
           alt="logo kongpos"
-          className="w-10 h-10 object-fill"
+          className={`w-10 ${open || openMobile ? "mr-3" : ""}`}
         />
-        <h1
-          className={`font-bold text-3xl text-gray-800 ${
-            !open ? "hidden" : "ml-3"
-          }`}
-        >
-          KONGPOS
-        </h1>
+        <span className="text-2xl uppercase font-bold">
+          {!open && !openMobile ? "" : "kongpos"}{" "}
+        </span>
+        {openMobile && (
+          <FontAwesomeIcon
+            icon={faClose}
+            onClick={() => setOpenMobile(false)}
+            className="absolute text-2xl right-5"
+          />
+        )}
       </div>
-      <ul className="p-5 flex flex-col gap-3">
-        {menus.map((menu, index) => (
-          <li key={index}>
-            <button
-              className={`w-full rounded-xl cursor-pointer flex items-center p-4 text-gray-800 gap-3 ${
-                !open ? "justify-center" : ""
-              }  ${menu.nama === menuAktif.nama && "bg-yellow-300 shadow-xl"}`}
+
+      {/* sidebar menus */}
+      <div>
+        <ul className="px-5 flex flex-col gap-3">
+          {menus.map((menu, index) => (
+            <li
+              key={index}
+              className={`flex items-center px-5 py-3 font-medium text-lg cursor-pointer rounded-lg ${
+                menu.title === aktif.title ? "bg-[#ffc90d] shadow-lg" : ""
+              } ${!open && !openMobile ? "justify-center" : ""}`}
               onClick={() => navigasiMenu(menu)}
             >
-              <FontAwesomeIcon icon={menu.icon} className={`text-xl`} />
-              {open && <span className="font-medium">{menu.nama}</span>}
-              {menu.subMenu && (
-                <span className="flex flex-grow items-center justify-end">
-                  <FontAwesomeIcon icon={faAngleDown} />
-                </span>
-              )}
-            </button>
-          </li>
-        ))}
-      </ul>
+              <FontAwesomeIcon
+                icon={menu.icon}
+                className={`${open || openMobile ? "mr-3" : ""}`}
+              />
+              <span className="capitalize">
+                {open || openMobile ? menu.title : ""}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

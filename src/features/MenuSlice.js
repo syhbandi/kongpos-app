@@ -1,24 +1,5 @@
-import {
-  faDatabase,
-  faTachometerAlt,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-const initialState = {
-  menus: [
-    {
-      nama: "Dashboard",
-      link: "/",
-      icon: faTachometerAlt,
-    },
-    { nama: "Data master", link: "/master", icon: faDatabase },
-    { nama: "Profil", link: "/profil", icon: faUser },
-  ],
-  open: true,
-  openSm: false,
-  menuAktif: {},
-};
+const initialState = {};
 
 const menuSlice = createSlice({
   name: "menu",

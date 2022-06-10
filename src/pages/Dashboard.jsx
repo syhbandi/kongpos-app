@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export const Dashboard = () => {
+  useEffect(() => {
+    document.title = "KONGPOS | Dashboard";
+  });
   return (
     <>
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
