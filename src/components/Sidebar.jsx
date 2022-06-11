@@ -43,14 +43,14 @@ const Sidebar = ({ open, openMobile, setOpenMobile }) => {
     >
       {/* title app */}
       <div
-        className={`h-20 flex items-center ${
+        className={`h-16 flex items-center bg-[#fce389] mb-5 ${
           !open && !openMobile ? "px-5 justify-center" : "px-10"
         }`}
       >
         <img
           src={logoKongpos}
           alt="logo kongpos"
-          className={`w-10 ${open || openMobile ? "mr-3" : ""}`}
+          className={`w-7 ${open || openMobile ? "mr-3" : ""}`}
         />
         <span className="text-2xl uppercase font-bold">
           {!open && !openMobile ? "" : "kongpos"}{" "}
@@ -59,7 +59,7 @@ const Sidebar = ({ open, openMobile, setOpenMobile }) => {
           <FontAwesomeIcon
             icon={faClose}
             onClick={() => setOpenMobile(false)}
-            className="absolute text-2xl right-5"
+            className="absolute text-xl right-5"
           />
         )}
       </div>
@@ -70,7 +70,7 @@ const Sidebar = ({ open, openMobile, setOpenMobile }) => {
           {menus.map((menu, index) => (
             <li
               key={index}
-              className={`flex items-center px-5 py-3 font-medium text-lg cursor-pointer rounded-lg ${
+              className={`flex items-center px-5 py-3 font-medium cursor-pointer rounded-lg ${
                 menu.title === aktif.title ? "bg-[#ffc90d] shadow-lg" : ""
               } ${!open && !openMobile ? "justify-center" : ""}`}
               onClick={() => navigasiMenu(menu)}
