@@ -38,12 +38,12 @@ const Sidebar = ({ open, openMobile, setOpenMobile }) => {
   return (
     <div
       className={`fixed  md:left-0 w-72 h-screen bg-white shadow-xl transition-all ease-in-out duration-300 ${
-        !open ? "md:w-28" : "md:w-72"
+        !open ? "md:w-20" : "md:w-72"
       } ${!openMobile ? "left-[-100vw]" : "left-0"}`}
     >
       {/* title app */}
       <div
-        className={`h-16 flex items-center bg-[#fce389] mb-5 ${
+        className={`h-16 flex items-center mb-5 ${
           !open && !openMobile ? "px-5 justify-center" : "px-10"
         }`}
       >

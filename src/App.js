@@ -12,7 +12,7 @@ function App() {
   return (
     <div
       className={`min-h-screen flex flex-col transition-all ease-in-out duration-300 ${
-        !open ? "md:pl-28" : "md:pl-72"
+        !open ? "md:pl-20" : "md:pl-72"
       }`}
     >
       <Navbar
