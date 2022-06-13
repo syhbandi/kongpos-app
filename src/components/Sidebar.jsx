@@ -23,7 +23,9 @@ const Sidebar = ({ open, openMobile, setOpenMobile }) => {
   useEffect(() => {
     if (window.location.pathname !== "/") {
       setAktif(
-        menus.find((menu) => window.location.pathname.slice(1) === menu.link)
+        menus.find(
+          (menu) => window.location.pathname.split("/")[1] === menu.link
+        )
       );
     } else {
       setAktif(menus[0]);
