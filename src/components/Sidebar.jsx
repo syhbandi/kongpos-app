@@ -9,12 +9,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logoKongpos from "../assets/logo-kongpos-app.png";
+import SidebarMenu from "./SidebarMenu";
 
 const Sidebar = ({ open, openMobile, setOpenMobile }) => {
   const [aktif, setAktif] = useState({});
   const [menus] = useState([
     { title: "dashboard", link: "/", icon: faTachometerAlt },
-    { title: "master", link: "master", icon: faDatabase },
+    {
+      title: "master",
+      link: "master",
+      icon: faDatabase,
+      subMenu: [
+        { title: "barang", link: "master/barang", icon: faDatabase },
+        {
+          title: "barang satuan",
+          link: "master/barangSatuan",
+          icon: faDatabase,
+        },
+      ],
+    },
     { title: "laporan", link: "laporan", icon: faFile },
     { title: "kontrak", link: "kontrak", icon: faContactBook },
   ]);
@@ -22,21 +35,24 @@ const Sidebar = ({ open, openMobile, setOpenMobile }) => {
 
   useEffect(() => {
     if (window.location.pathname !== "/") {
-      setAktif(
-        menus.find(
+      setAktif(() => {
+        const menuAktif = menus.find(
           (menu) => window.location.pathname.split("/")[1] === menu.link
-        )
-      );
+        );
+
+        if (menuAktif.subMenu) {
+          return menuAktif.subMenu.find(
+            (sub) => window.location.pathname.slice(1) === sub.link
+          );
+        }
+
+        return menuAktif;
+      });
     } else {
       setAktif(menus[0]);
     }
   }, [menus]);
 
-  const navigasiMenu = (menu) => {
-    navigate(menu.link);
-    setAktif(menu);
-    setOpenMobile(false);
-  };
   return (
     <div
       className={`fixed  md:left-0 w-72 h-screen bg-white shadow-xl transition-all ease-in-out duration-300 ${
@@ -67,27 +83,18 @@ const Sidebar = ({ open, openMobile, setOpenMobile }) => {
       </div>
 
       {/* sidebar menus */}
-      <div>
-        <ul className="px-5 flex flex-col gap-3">
-          {menus.map((menu, index) => (
-            <li
-              key={index}
-              className={`flex items-center px-5 py-3 font-medium cursor-pointer rounded-lg ${
-                menu.title === aktif.title ? "bg-[#ffc90d] shadow-lg" : ""
-              } ${!open && !openMobile ? "justify-center" : ""}`}
-              onClick={() => navigasiMenu(menu)}
-            >
-              <FontAwesomeIcon
-                icon={menu.icon}
-                className={`${open || openMobile ? "mr-3" : ""}`}
-              />
-              <span className="capitalize">
-                {open || openMobile ? menu.title : ""}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="px-5 flex flex-col">
+        {menus.map((menu, index) => (
+          <SidebarMenu
+            menu={menu}
+            key={index}
+            open={open}
+            openMobile={openMobile}
+            aktif={aktif}
+            setAktif={setAktif}
+          />
+        ))}
+      </ul>
     </div>
   );
 };
