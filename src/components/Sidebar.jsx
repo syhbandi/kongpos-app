@@ -8,7 +8,6 @@ import { menus } from "./SidebarMenuData";
 
 const Sidebar = ({ open, openMobile, setOpenMobile, setTitle }) => {
   const [aktif, setAktif] = useState({});
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (window.location.pathname !== "/") {
