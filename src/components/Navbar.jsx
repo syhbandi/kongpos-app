@@ -12,9 +12,7 @@ import React from "react";
 export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
   return (
     <div
-      className={
-        "h-16 px-5 shadow-md flex items-center sticky top-0 bg-[#ffc90d]"
-      }
+      className={"h-16 px-5 shadow-md flex items-center sticky top-0 bg-white"}
     >
       <div
         onClick={() => setOpen(!open)}

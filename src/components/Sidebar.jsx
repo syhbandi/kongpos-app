@@ -1,36 +1,13 @@
-import {
-  faClose,
-  faContactBook,
-  faDatabase,
-  faFile,
-  faTachometerAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logoKongpos from "../assets/logo-kongpos-app.png";
 import SidebarMenu from "./SidebarMenu";
+import { menus } from "./SidebarMenuData";
 
-const Sidebar = ({ open, openMobile, setOpenMobile }) => {
+const Sidebar = ({ open, openMobile, setOpenMobile, setTitle }) => {
   const [aktif, setAktif] = useState({});
-  const [menus] = useState([
-    { title: "dashboard", link: "/", icon: faTachometerAlt },
-    {
-      title: "master",
-      link: "master",
-      icon: faDatabase,
-      subMenu: [
-        { title: "barang", link: "master/barang", icon: faDatabase },
-        {
-          title: "barang satuan",
-          link: "master/barangSatuan",
-          icon: faDatabase,
-        },
-      ],
-    },
-    { title: "laporan", link: "laporan", icon: faFile },
-    { title: "kontrak", link: "kontrak", icon: faContactBook },
-  ]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -92,6 +69,8 @@ const Sidebar = ({ open, openMobile, setOpenMobile }) => {
             openMobile={openMobile}
             aktif={aktif}
             setAktif={setAktif}
+            setOpenMobile={setOpenMobile}
+            setTitle={setTitle}
           />
         ))}
       </ul>

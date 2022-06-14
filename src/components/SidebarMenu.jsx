@@ -4,7 +4,15 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SidebarMenu = ({ menu, aktif, open, openMobile, setAktif }) => {
+const SidebarMenu = ({
+  menu,
+  aktif,
+  open,
+  openMobile,
+  setAktif,
+  setOpenMobile,
+  setTitle,
+}) => {
   const [subMenu, setSubMenu] = useState(false);
   const navigate = useNavigate();
   const navigasiMenu = (menu) => {
@@ -15,14 +23,18 @@ const SidebarMenu = ({ menu, aktif, open, openMobile, setAktif }) => {
 
     navigate(menu.link);
     setAktif(menu);
+    setOpenMobile(false);
+    setTitle(menu.title);
   };
+
+  useEffect(() => {});
 
   return (
     <div className="select-none">
       <div
         className={`flex items-center px-5 py-3 font-medium cursor-pointer rounded-lg mb-2 ${
           menu.title === aktif.title ? "bg-[#ffc90d] shadow-lg" : ""
-        }`}
+        } ${!open ? "justify-center" : ""}`}
         onClick={(e) => navigasiMenu(menu)}
       >
         <FontAwesomeIcon
@@ -48,6 +60,8 @@ const SidebarMenu = ({ menu, aktif, open, openMobile, setAktif }) => {
                 openMobile={openMobile}
                 aktif={aktif}
                 setAktif={setAktif}
+                setOpenMobile={setOpenMobile}
+                setTitle={setTitle}
               />
             ))
           : null}
