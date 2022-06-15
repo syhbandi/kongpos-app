@@ -12,6 +12,15 @@ import Kontrak from "./pages/Kontrak";
 import Login from "./pages/Login";
 import Barang from "./pages/master/barang";
 import AddBarang from "./pages/master/barang/AddBarang";
+import {PenjualanPerdivisi, PenjualanPercustomer, PenjualanPeruser, PenjualanPerkas, PenjualanPerbarang, PenjualanPerpegawai} from "./pages/laporan/PenjualanPerperiode";
+import { PembelianPerbarang, PembelianPeruser, PembelianPerdivisi, PembelianPerkas, PembelianPersupplier } from "./pages/laporan/PembelianPerperiode";
+import { SA_perbarang, SA_perbarang_perdivisi, SA_perperiode } from "./pages/laporan/Inventori";
+import { Biaya_perdivisi, Biaya_perjenis_biaya, Biaya_perkas } from "./pages/laporan/Biaya";
+import { Pendapatan_perdivisi, Pendapatan_perkas, Pendapatan_perjenis_pendapatan } from "./pages/laporan/Pendapatan";
+import { Hutang_pembelian } from "./pages/laporan/Hutang";
+import { Piutang_penjualan } from "./pages/laporan/Piutang";
+import { Laba_rugi } from "./pages/laporan/LabaRugi";
+
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -30,8 +39,56 @@ root.render(
                 <Route path=":barangId" element={<Barang />} />
               </Route>
             </Route>
-            <Route path="laporan" element={<Laporan />} />
-            <Route path="kontrak" element={<Kontrak />} />
+            <Route path="laporan">
+              <Route path="laporan-penjualan-perperiode">
+                <Route path="penjualan-perdivisi" element={<PenjualanPerdivisi />} />
+                <Route path="penjualan-percustomer" element={<PenjualanPercustomer />} />
+                <Route path="penjualan-peruser" element={<PenjualanPeruser />} />
+                <Route path="penjualan-perkas" element={<PenjualanPerkas />} />
+                <Route path="penjualan-perbarang" element={<PenjualanPerbarang />} />
+                <Route path="penjualan-perpegawai" element={<PenjualanPerpegawai />} />
+              </Route>
+              <Route path="laporan-pembelian-perperiode">
+                <Route path="pembelian-persupplier" element={<PembelianPersupplier/>} />
+                <Route path="pembelian-perdivisi" element={<PembelianPerdivisi/>} />
+                <Route path="pembelian-perkas" element={<PembelianPerkas/>} />
+                <Route path="pembelian-peruser" element={<PembelianPeruser/>} />
+                <Route path="pembelian-perbarang" element={<PembelianPerbarang/>} />
+              </Route>
+              <Route>
+                <Route path="laporan-inventori">
+                  <Route path="stok-akhir-perperiode" element={<SA_perperiode/>} />
+                  <Route path="stok-akhir-perbarang" element={<SA_perbarang/>} />
+                  <Route path="stok-akhir-perbarang-perdivisi" element={<SA_perbarang_perdivisi/>} />
+                </Route>  
+              </Route>
+              <Route>
+                <Route path="laporan-biaya">
+                  <Route path="biaya-perkas" element={<Biaya_perkas/>} />
+                  <Route path="biaya-perdivisi" element={<Biaya_perdivisi />} />
+                  <Route path="biaya-perjenis-biaya" element={<Biaya_perjenis_biaya/>} />
+                </Route>  
+              </Route>
+              <Route>
+                <Route path="laporan-pendapatan">
+                  <Route path="Pendapatan-perkas" element={<Pendapatan_perkas/>} />
+                  <Route path="Pendapatan-perdivisi" element={<Pendapatan_perdivisi/>} />
+                  <Route path="Pendapatan-perjenis-Pendapatan" element={<Pendapatan_perjenis_pendapatan/>} />
+                </Route>  
+              </Route>
+              <Route>
+                <Route path="laporan-hutang">
+                  <Route path="hutang-pembelian" element={<Hutang_pembelian/>} />
+                </Route>  
+              </Route>
+              <Route>
+                <Route path="laporan-piutang">
+                  <Route path="piutang-penjualan" element={<Piutang_penjualan/>} />
+                </Route>  
+              </Route>
+              <Route path="laba-rugi" element={<Laba_rugi />}></Route>
+            </Route>
+            
           </Route>
           <Route path="/login" element={<Login />} />
         </Routes>

@@ -10,25 +10,25 @@ const Sidebar = ({ open, openMobile, setOpenMobile, setTitle }) => {
   const [aktif, setAktif] = useState({});
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (window.location.pathname !== "/") {
-      setAktif(() => {
-        const menuAktif = menus.find(
-          (menu) => window.location.pathname.split("/")[1] === menu.link
-        );
+  // useEffect(() => {
+  //   if (window.location.pathname !== "/") {
+  //     setAktif(() => {
+  //       const menuAktif = menus.find(
+  //         (menu) => window.location.pathname.split("/")[1] === menu.link
+  //       );
 
-        if (menuAktif.subMenu) {
-          return menuAktif.subMenu.find(
-            (sub) => window.location.pathname.slice(1) === sub.link
-          );
-        }
+  //       if (menuAktif.subMenu) {
+  //         return menuAktif.subMenu.find(
+  //           (sub) => window.location.pathname.slice(1) === sub.link
+  //         );
+  //       }
 
-        return menuAktif;
-      });
-    } else {
-      setAktif(menus[0]);
-    }
-  }, [menus]);
+  //       return menuAktif;
+  //     });
+  //   } else {
+  //     setAktif(menus[0]);
+  //   }
+  // }, [menus]);
 
   return (
     <div
