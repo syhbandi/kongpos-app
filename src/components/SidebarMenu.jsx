@@ -32,7 +32,7 @@ const SidebarMenu = ({
   return (
     <div className="select-none">
       <div
-        className={`flex items-center px-5 py-3 font-medium cursor-pointer rounded-lg mb-2 ${
+        className={`flex items-center px-5 py-3 font-medium cursor-pointer rounded-lg mb-2 transition-all duration-300 ease-in-out ${
           menu.title === aktif.title ? "bg-[#ffc90d] shadow-lg" : ""
         } ${!open ? "justify-center" : ""}`}
         onClick={(e) => navigasiMenu(menu)}
@@ -50,7 +50,7 @@ const SidebarMenu = ({
           ) : null}
         </span>
       </div>
-      <div className="">
+      <div className={``}>
         {menu.subMenu && subMenu
           ? menu.subMenu.map((sub, index) => (
               <SidebarMenu
