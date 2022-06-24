@@ -563,6 +563,7 @@ const PenjualanPercustomer = () => {
     const newFormData = { ...formData };
     newFormData.count_stats = 1;
     dispatch(getPenjualanCount(newFormData));
+    console.log(dataCount);
   };
 
   useEffect(() => {
@@ -703,11 +704,7 @@ const PenjualanPercustomer = () => {
               ))}
           </tbody>
         </table>
-        <strong>
-          Jumlah Data :{" "}
-          {/* {dataCount &&
-            dataCount.map((count) => <span>{count.jumlah_record}</span>)} */}
-        </strong>
+        <strong>Jumlah Data : {dataCount && dataCount.jumlah_record}</strong>
       </div>
     </>
   );
