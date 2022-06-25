@@ -35,6 +35,7 @@ const laporanPenjualanSlice = createSlice({
   reducers: {
     reset: (state, action) => {
       state.data = null;
+      state.dataCount = 0;
       state.status = "";
       state.message = "";
     },

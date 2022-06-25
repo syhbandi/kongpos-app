@@ -6,7 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
-const Table = ({ data }) => {
+const Table = ({ data, handleSort }) => {
   const [order, setOrder] = useState({
     field: "",
     asc: true,
@@ -14,21 +14,26 @@ const Table = ({ data }) => {
   const headers = Object.keys(data[0]).map((value) => value);
 
   const handleColClick = (value) => {
-    if (order.field === value) {
-      if (!order.asc) {
-        setOrder({ ...order, field: "", asc: true });
+    let newOrder = { ...order };
+    if (newOrder.field === value) {
+      if (!newOrder.asc) {
+        newOrder = { field: "", asc: true };
       } else {
-        setOrder({ ...order, asc: false });
+        newOrder.asc = false;
       }
     } else {
-      setOrder({ ...order, field: value });
+      newOrder.field = value;
     }
+
+    setOrder(newOrder);
+    handleSort(newOrder.field, newOrder.asc ? "asc" : "desc");
   };
 
   return (
     <table className="w-full border-collapse">
       <thead className="bg-white">
         <tr>
+          <th className="border border-gray-500">NO</th>
           {headers.map((value, index) => (
             <th key={index} className="border border-gray-500">
               <button
@@ -45,6 +50,9 @@ const Table = ({ data }) => {
                         : faSortAmountUp
                       : faSort
                   }
+                  className={`${
+                    order.field === value ? "text-black" : "text-gray-300"
+                  }`}
                 />
               </button>
             </th>
@@ -54,6 +62,9 @@ const Table = ({ data }) => {
       <tbody>
         {data.map((result, index) => (
           <tr key={index}>
+            <td className="bg-white px-4 py-3 border border-gray-500 text-center">
+              {index + 1}
+            </td>
             {headers.map((value, index) => (
               <td
                 className="bg-white px-4 py-3 border border-gray-500"
