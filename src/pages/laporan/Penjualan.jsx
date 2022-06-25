@@ -181,7 +181,12 @@ const Penjualan = ({ jenis }) => {
 
         {/* table data */}
         {data && data.length > 0 ? (
-          <Table data={data} handleSort={handleSort} />
+          <Table
+            data={data}
+            handleSort={handleSort}
+            colSort={formData.order_col}
+            typeSort={formData.order_type}
+          />
         ) : (
           <div className="w-full text-center mt-5">
             <div className="text-3xl text-yellow-500">

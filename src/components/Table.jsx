@@ -6,28 +6,31 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
-const Table = ({ data, handleSort }) => {
+const Table = ({ data, handleSort, colSort, typeSort }) => {
   const [order, setOrder] = useState({
-    field: "",
-    asc: true,
+    col: "",
+    type: "",
   });
   const headers = Object.keys(data[0]).map((value) => value);
 
   const handleColClick = (value) => {
     let newOrder = { ...order };
-    if (newOrder.field === value) {
-      if (!newOrder.asc) {
-        newOrder = { field: "", asc: true };
+    if (newOrder.col === value) {
+      if (newOrder.type === "desc") {
+        newOrder = { col: "", type: "" };
       } else {
-        newOrder.asc = false;
+        newOrder.type = "desc";
       }
     } else {
-      newOrder.field = value;
+      newOrder.col = value;
     }
-
     setOrder(newOrder);
-    handleSort(newOrder.field, newOrder.asc ? "asc" : "desc");
+    handleSort(newOrder.col, newOrder.type);
   };
+
+  useEffect(() => {
+    setOrder({ col: colSort, type: typeSort });
+  }, [colSort, typeSort]);
 
   return (
     <table className="w-full border-collapse">
@@ -44,14 +47,14 @@ const Table = ({ data, handleSort }) => {
                 <span className="uppercase font-bold">{value}</span>
                 <FontAwesomeIcon
                   icon={
-                    order.field === value
-                      ? order.asc
+                    order.col === value
+                      ? order.type === ""
                         ? faSortAmountDown
                         : faSortAmountUp
                       : faSort
                   }
                   className={`${
-                    order.field === value ? "text-black" : "text-gray-300"
+                    order.col === value ? "text-black" : "text-gray-300"
                   }`}
                 />
               </button>
