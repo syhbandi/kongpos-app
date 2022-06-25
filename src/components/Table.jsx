@@ -1,7 +1,9 @@
 import {
   faSort,
   faSortAmountDown,
+  faSortAmountDownAlt,
   faSortAmountUp,
+  faSortAmountUpAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
@@ -49,8 +51,8 @@ const Table = ({ data, handleSort, colSort, typeSort }) => {
                   icon={
                     order.col === value
                       ? order.type === ""
-                        ? faSortAmountDown
-                        : faSortAmountUp
+                        ? faSortAmountDownAlt
+                        : faSortAmountDown
                       : faSort
                   }
                   className={`${
