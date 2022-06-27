@@ -31,7 +31,7 @@ const Table = ({ data, handleSort, colSort, typeSort }) => {
   };
 
   useEffect(() => {
-    setOrder({ col: `${colSort}`, type: `${typeSort}` });
+    setOrder({ col: colSort, type: typeSort });
   }, [colSort, typeSort]);
 
   return (
