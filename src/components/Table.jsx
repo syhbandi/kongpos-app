@@ -5,6 +5,7 @@ import {
   faSortAmountDownAlt,
   faSortAmountUp,
   faSortAmountUpAlt,
+  faWarning,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
@@ -29,7 +30,8 @@ const Table = ({
     col: "",
     type: "",
   });
-  const headers = Object.keys(data[0]).map((value) => value);
+  const headers =
+    data && data.length > 0 ? Object.keys(data[0]).map((value) => value) : null;
 
   const handleColClick = (value) => {
     let newOrder = { ...order };
@@ -90,55 +92,65 @@ const Table = ({
           </div>
         </form>
       </div>
-      <table className="w-full border-collapse">
-        <thead className="bg-white">
-          <tr>
-            <th className="border border-gray-500">NO</th>
-            {headers.map((value, index) => (
-              <th key={index} className="border border-gray-500">
-                <button
-                  className="flex items-center justify-between w-full px-4 py-3"
-                  id={value}
-                  onClick={() => handleColClick(value)}
-                >
-                  <span className="uppercase font-bold">{value}</span>
-                  <FontAwesomeIcon
-                    icon={
-                      order.col.slice(1, order.col.length - 1) === value
-                        ? order.type === ""
-                          ? faSortAmountDownAlt
-                          : faSortAmountDown
-                        : faSort
-                    }
-                    className={`${
-                      order.col.slice(1, order.col.length - 1) === value
-                        ? "text-black"
-                        : "text-gray-300"
-                    }`}
-                  />
-                </button>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((result, index) => (
-            <tr
-              key={index}
-              className="hover:bg-gray-100 bg-white cursor-pointer"
-            >
-              <td className="px-4 py-3 border border-gray-500 text-center">
-                {index + offset + 1}
-              </td>
+      {data && data.length > 0 ? (
+        <table className="w-full border-collapse">
+          <thead className="bg-white">
+            <tr>
+              <th className="border border-gray-500">NO</th>
               {headers.map((value, index) => (
-                <td className=" px-4 py-3 border border-gray-500" key={index}>
-                  {result[value]}
-                </td>
+                <th key={index} className="border border-gray-500">
+                  <button
+                    className="flex items-center justify-between w-full px-4 py-3"
+                    id={value}
+                    onClick={() => handleColClick(value)}
+                  >
+                    <span className="uppercase font-bold">{value}</span>
+                    <FontAwesomeIcon
+                      icon={
+                        order.col.slice(1, order.col.length - 1) === value
+                          ? order.type === ""
+                            ? faSortAmountDownAlt
+                            : faSortAmountDown
+                          : faSort
+                      }
+                      className={`${
+                        order.col.slice(1, order.col.length - 1) === value
+                          ? "text-black"
+                          : "text-gray-300"
+                      }`}
+                    />
+                  </button>
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((result, index) => (
+              <tr
+                key={index}
+                className="hover:bg-gray-100 bg-white cursor-pointer"
+              >
+                <td className="px-4 py-3 border border-gray-500 text-center">
+                  {index + offset + 1}
+                </td>
+                {headers.map((value, index) => (
+                  <td className=" px-4 py-3 border border-gray-500" key={index}>
+                    {result[value]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="w-full text-center mt-5">
+          <div className="text-3xl text-yellow-500">
+            <FontAwesomeIcon icon={faWarning} />
+          </div>
+          <div>Tidak mendapatkan data</div>
+        </div>
+      )}
+
       {/* footer */}
       <div className="flex flex-col md:flex-row items-center mt-5">
         <div className="font-bold">Total data: {dataCount}</div>

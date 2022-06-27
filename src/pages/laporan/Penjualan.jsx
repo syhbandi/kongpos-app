@@ -145,30 +145,21 @@ const Penjualan = ({ jenis }) => {
       </div>
       <div className="rounded-lg bg-white shadow-lg p-5 min-h-[200px]">
         {/* table data */}
-        {data && data.length > 0 ? (
-          <Table
-            data={data}
-            handleSort={handleSort}
-            colSort={formData.order_col}
-            typeSort={formData.order_type}
-            offset={formData.limit}
-            length={formData.length}
-            search={formData.search}
-            handlePage={handlePage}
-            handleFilter={handleFilter}
-            handleFormChange={handleFormChange}
-            dataCount={dataCount}
-            handlePaginate={handlePaginate}
-            page={page}
-          />
-        ) : (
-          <div className="w-full text-center mt-5">
-            <div className="text-3xl text-yellow-500">
-              <FontAwesomeIcon icon={faWarning} />
-            </div>
-            <div>Tidak mendapatkan data</div>
-          </div>
-        )}
+        <Table
+          data={data}
+          handleSort={handleSort}
+          colSort={formData.order_col}
+          typeSort={formData.order_type}
+          offset={formData.limit}
+          length={formData.length}
+          search={formData.search}
+          handlePage={handlePage}
+          handleFilter={handleFilter}
+          handleFormChange={handleFormChange}
+          dataCount={dataCount}
+          handlePaginate={handlePaginate}
+          page={page}
+        />
       </div>
 
       {/* loader */}
