@@ -76,7 +76,7 @@ const Table = ({
         <form onSubmit={handleFilter}>
           <div className="flex items-center rounded-lg">
             <input
-              type="text"
+              type="search"
               id="search"
               placeholder="Cari"
               className="w-full md:w-56 outline-0 px-3 py-2 border border-gray-500 rounded-l-lg"
@@ -92,6 +92,7 @@ const Table = ({
           </div>
         </form>
       </div>
+
       {data && data.length > 0 ? (
         <table className="w-full border-collapse">
           <thead className="bg-white">
