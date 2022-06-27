@@ -22,18 +22,29 @@ const SidebarMenu = ({
     }
 
     navigate(menu.link);
-    setAktif(menu);
+    setAktif(menu.title);
     setOpenMobile(false);
     setTitle(menu.title);
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    if (
+      window.location.pathname.slice(1) === menu.link ||
+      window.location.pathname === menu.link
+    ) {
+      setAktif(menu.title);
+    }
+
+    if (window.location.pathname.includes(menu.link) && menu.subMenu) {
+      setSubMenu(true);
+    }
+  }, []);
 
   return (
     <div className="select-none">
       <div
         className={`flex items-center px-5 py-3 font-medium cursor-pointer rounded-lg mb-2 transition-all duration-300 ease-in-out ${
-          menu.title === aktif.title ? "bg-[#ffc90d] shadow-lg" : ""
+          menu.title === aktif ? "bg-[#ffc90d] shadow-lg" : ""
         } ${!open ? "justify-center" : ""}`}
         onClick={(e) => navigasiMenu(menu)}
       >
