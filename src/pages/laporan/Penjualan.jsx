@@ -46,12 +46,15 @@ const Penjualan = ({ jenis }) => {
     setFormData(initialState);
     dispatch(getPenjualan(initialState));
     dispatch(getPenjualanCount({ ...initialState, count_stats: 1 }));
+    setPage(0);
   };
 
   const handleFilter = (e) => {
     e.preventDefault();
-    dispatch(getPenjualan(formData));
-    dispatch(getPenjualanCount({ ...formData, count_stats: 1 }));
+    setFormData((prevState) => ({ ...prevState, limit: 0 }));
+    dispatch(getPenjualan({ ...formData, limit: 0 }));
+    dispatch(getPenjualanCount({ ...formData, count_stats: 1, limit: 0 }));
+    setPage(0);
   };
 
   const handlePage = (e) => {
@@ -72,7 +75,6 @@ const Penjualan = ({ jenis }) => {
       order_col: col,
       order_type: type,
     }));
-    console.log(col, type);
     dispatch(getPenjualan({ ...formData, order_col: col, order_type: type }));
     dispatch(
       getPenjualanCount({
@@ -87,9 +89,6 @@ const Penjualan = ({ jenis }) => {
   const handlePaginate = (e) => {
     const newOffset = (e.selected * formData.length) % dataCount;
     setFormData((prevState) => ({ ...prevState, limit: newOffset }));
-    console.log(
-      `User requested page number ${e.selected}, which is offset ${newOffset}`
-    );
     dispatch(getPenjualan({ ...formData, limit: newOffset }));
     setPage(e.selected);
   };
