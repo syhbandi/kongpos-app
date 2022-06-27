@@ -68,15 +68,12 @@ const Table = ({ data, handleSort, colSort, typeSort, offset }) => {
       </thead>
       <tbody>
         {data.map((result, index) => (
-          <tr key={index}>
-            <td className="bg-white px-4 py-3 border border-gray-500 text-center">
+          <tr key={index} className="hover:bg-gray-100 bg-white cursor-pointer">
+            <td className="px-4 py-3 border border-gray-500 text-center">
               {index + offset + 1}
             </td>
             {headers.map((value, index) => (
-              <td
-                className="bg-white px-4 py-3 border border-gray-500"
-                key={index}
-              >
+              <td className=" px-4 py-3 border border-gray-500" key={index}>
                 {result[value]}
               </td>
             ))}

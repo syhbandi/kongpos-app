@@ -74,16 +74,12 @@ const Penjualan = ({ jenis }) => {
       ...prevState,
       order_col: col,
       order_type: type,
+      limit: 0,
     }));
-    dispatch(getPenjualan({ ...formData, order_col: col, order_type: type }));
     dispatch(
-      getPenjualanCount({
-        ...formData,
-        order_col: col,
-        order_type: type,
-        count_stats: 1,
-      })
+      getPenjualan({ ...formData, order_col: col, order_type: type, limit: 0 })
     );
+    setPage(0);
   };
 
   const handlePaginate = (e) => {
