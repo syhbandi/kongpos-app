@@ -9,25 +9,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-const Table = ({
-  data,
-  handleSort,
-  colSort,
-  typeSort,
-  offset,
-  length,
-  search,
-  handlePage,
-  handleFilter,
-  handleFormChange,
-  dataCount,
-  handlePaginate,
-  page,
-}) => {
+const Table = (props) => {
+  const {
+    data,
+    handleSort,
+    colSort,
+    typeSort,
+    offset,
+    length,
+    search,
+    handlePage,
+    handleFilter,
+    handleFormChange,
+    dataCount,
+    handlePaginate,
+    page,
+  } = props;
+
   const [order, setOrder] = useState({
     col: "",
     type: "",
   });
+
   const headers =
     data && data.length > 0 ? Object.keys(data[0]).map((value) => value) : null;
 
