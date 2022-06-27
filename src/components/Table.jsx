@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
-const Table = ({ data, handleSort, colSort, typeSort }) => {
+const Table = ({ data, handleSort, colSort, typeSort, offset }) => {
   const [order, setOrder] = useState({
     col: "",
     type: "",
@@ -70,7 +70,7 @@ const Table = ({ data, handleSort, colSort, typeSort }) => {
         {data.map((result, index) => (
           <tr key={index}>
             <td className="bg-white px-4 py-3 border border-gray-500 text-center">
-              {index + 1}
+              {index + offset + 1}
             </td>
             {headers.map((value, index) => (
               <td

@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "../../components/Table";
 import {
@@ -29,6 +30,7 @@ const Penjualan = ({ jenis }) => {
     count_stats: 0,
   };
   const [formData, setFormData] = useState(initialState);
+  const [page, setPage] = useState(0);
   const { data, status, message, dataCount } = useSelector(
     (state) => state.laporanPenjualan
   );
@@ -56,15 +58,12 @@ const Penjualan = ({ jenis }) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
+      limit: 0,
     }));
-    dispatch(getPenjualan({ ...formData, [e.target.id]: e.target.value }));
     dispatch(
-      getPenjualanCount({
-        ...formData,
-        [e.target.id]: e.target.value,
-        count_stats: 1,
-      })
+      getPenjualan({ ...formData, [e.target.id]: e.target.value, limit: 0 })
     );
+    setPage(0);
   };
 
   const handleSort = (col, type) => {
@@ -83,6 +82,16 @@ const Penjualan = ({ jenis }) => {
         count_stats: 1,
       })
     );
+  };
+
+  const handlePaginate = (e) => {
+    const newOffset = (e.selected * formData.length) % dataCount;
+    setFormData((prevState) => ({ ...prevState, limit: newOffset }));
+    console.log(
+      `User requested page number ${e.selected}, which is offset ${newOffset}`
+    );
+    dispatch(getPenjualan({ ...formData, limit: newOffset }));
+    setPage(e.selected);
   };
 
   useEffect(() => {
@@ -141,8 +150,8 @@ const Penjualan = ({ jenis }) => {
       </div>
       <div className="rounded-lg bg-white shadow-lg p-5 min-h-[200px]">
         {/* jumlah data per page */}
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-5">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-3">
+          <div className="flex items-center gap-5 mb-3 md:mb-0">
             <span>Menampilkan</span>
             <select
               id="length"
@@ -186,6 +195,7 @@ const Penjualan = ({ jenis }) => {
             handleSort={handleSort}
             colSort={formData.order_col}
             typeSort={formData.order_type}
+            offset={formData.limit}
           />
         ) : (
           <div className="w-full text-center mt-5">
@@ -197,8 +207,37 @@ const Penjualan = ({ jenis }) => {
         )}
 
         {/* footer */}
-        <div className="flex flex-col md:flex-row items-center mt-3">
+        <div className="flex flex-col md:flex-row items-center mt-5">
           <div className="font-bold">Total data: {dataCount}</div>
+          <div className="ml-auto">
+            <ReactPaginate
+              forcePage={page}
+              previousLabel={"<<"}
+              nextLabel={">>"}
+              breakLabel={"..."}
+              pageCount={Math.ceil(dataCount && dataCount / formData.length)}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={3}
+              onPageChange={handlePaginate}
+              containerClassName={
+                "inline-flex items-center select-none border-collapse"
+              }
+              pageLinkClassName={
+                "p-3 bg-white font-medium border-y border-gray-500 text-blue-700 hover:bg-gray-200"
+              }
+              previousLinkClassName={
+                "rounded-l-lg p-3 bg-white font-medium border-y border-l border-gray-500 text-blue-700 hover:bg-gray-200"
+              }
+              nextLinkClassName={
+                "p-3 bg-white font-medium border-y border-r border-gray-500 text-blue-700 rounded-r-lg hover:bg-gray-200"
+              }
+              breakLinkClassName={
+                "p-3 bg-white font-medium border-y border-gray-500 text-blue-700 hover:bg-gray-200"
+              }
+              activeLinkClassName="bg-blue-700 text-yellow-400 hover:bg-blue-700"
+              renderOnZeroPageCount={null}
+            />
+          </div>
         </div>
       </div>
 
