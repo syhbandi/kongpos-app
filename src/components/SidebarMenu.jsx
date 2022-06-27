@@ -38,7 +38,7 @@ const SidebarMenu = ({
     if (window.location.pathname.includes(menu.link) && menu.subMenu) {
       setSubMenu(true);
     }
-  }, []);
+  }, [menu.link, menu.subMenu, menu.title, setAktif]);
 
   return (
     <div className="select-none">

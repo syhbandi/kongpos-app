@@ -3,8 +3,6 @@ import {
   faSort,
   faSortAmountDown,
   faSortAmountDownAlt,
-  faSortAmountUp,
-  faSortAmountUpAlt,
   faWarning,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

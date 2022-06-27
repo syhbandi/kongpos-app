@@ -1,7 +1,6 @@
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import logoKongpos from "../assets/logo-kongpos-app.png";
 import SidebarMenu from "./SidebarMenu";
 import { menus } from "./SidebarMenuData";
