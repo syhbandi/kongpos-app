@@ -17,21 +17,21 @@ const Table = ({ data, handleSort, colSort, typeSort }) => {
 
   const handleColClick = (value) => {
     let newOrder = { ...order };
-    if (newOrder.col === value) {
+    if (newOrder.col.slice(1, newOrder.col.length - 1) === value) {
       if (newOrder.type === "desc") {
         newOrder = { col: "", type: "" };
       } else {
         newOrder.type = "desc";
       }
     } else {
-      newOrder.col = value;
+      newOrder.col = "`" + value + "`";
     }
     setOrder(newOrder);
     handleSort(newOrder.col, newOrder.type);
   };
 
   useEffect(() => {
-    setOrder({ col: colSort, type: typeSort });
+    setOrder({ col: `${colSort}`, type: `${typeSort}` });
   }, [colSort, typeSort]);
 
   return (
@@ -49,14 +49,16 @@ const Table = ({ data, handleSort, colSort, typeSort }) => {
                 <span className="uppercase font-bold">{value}</span>
                 <FontAwesomeIcon
                   icon={
-                    order.col === value
+                    order.col.slice(1, order.col.length - 1) === value
                       ? order.type === ""
                         ? faSortAmountDownAlt
                         : faSortAmountDown
                       : faSort
                   }
                   className={`${
-                    order.col === value ? "text-black" : "text-gray-300"
+                    order.col.slice(1, order.col.length - 1) === value
+                      ? "text-black"
+                      : "text-gray-300"
                   }`}
                 />
               </button>
