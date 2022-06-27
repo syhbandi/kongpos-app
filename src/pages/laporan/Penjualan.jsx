@@ -1,12 +1,6 @@
-import {
-  faFilter,
-  faRefresh,
-  faSearch,
-  faWarning,
-} from "@fortawesome/free-solid-svg-icons";
+import { faFilter, faRefresh } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "../../components/Table";
 import {
