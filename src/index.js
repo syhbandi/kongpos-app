@@ -45,6 +45,7 @@ import {
 import { Hutang_pembelian } from "./pages/laporan/Hutang";
 import { Piutang_penjualan } from "./pages/laporan/Piutang";
 import { Laba_rugi } from "./pages/laporan/LabaRugi";
+import Penjualan from "./pages/laporan/Penjualan";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -67,11 +68,11 @@ root.render(
               <Route path="laporan-penjualan-perperiode">
                 <Route
                   path="penjualan-perdivisi"
-                  element={<PenjualanPerdivisi />}
+                  element={<Penjualan jenis={"1"} />}
                 />
                 <Route
                   path="penjualan-percustomer"
-                  element={<PenjualanPercustomer />}
+                  element={<Penjualan jenis={"2"} />}
                 />
                 <Route
                   path="penjualan-peruser"
