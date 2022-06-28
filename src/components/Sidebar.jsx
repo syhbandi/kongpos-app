@@ -16,7 +16,7 @@ const Sidebar = ({ open, openMobile, setOpenMobile, setTitle }) => {
     >
       {/* title app */}
       <div
-        className={`h-16 flex items-center mb-5 ${
+        className={`h-16 flex items-center ${
           !open && !openMobile ? "px-5 justify-center" : "px-10"
         }`}
       >
@@ -38,7 +38,7 @@ const Sidebar = ({ open, openMobile, setOpenMobile, setTitle }) => {
       </div>
 
       {/* sidebar menus */}
-      <ul className="px-5 flex flex-col">
+      <ul className="p-5 pr-3 flex flex-col h-full overflow-auto">
         {menus.map((menu, index) => (
           <SidebarMenu
             menu={menu}
