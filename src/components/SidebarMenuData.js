@@ -29,13 +29,13 @@ export const menus = [
     icon: faFile,
     subMenu: [
       {
-        title: "Penjualan Perperiode",
+        title: "Penjualan",
         link: "laporan/laporan-penjualan-perperiode",
         icon: faDotCircle,
         subMenu: [
           {
-            title: "Penjualan Perdivisi",
-            link: "laporan/laporan-penjualan-perperiode/penjualan-perdivisi",
+            title: "Penjualan Pernota",
+            link: "laporan/laporan-penjualan-perperiode/penjualan-pernota",
             icon: faCircle,
           },
           {
@@ -44,13 +44,45 @@ export const menus = [
             icon: faCircle,
           },
           {
-            title: "Penjualan Peruser",
-            link: "laporan/laporan-penjualan-perperiode/penjualan-peruser",
+            title: "Penjualan Perdivisi",
+            link: "laporan/laporan-penjualan-perperiode/penjualan-perdivisi",
             icon: faCircle,
           },
           {
             title: "Penjualan Perkas",
             link: "laporan/laporan-penjualan-perperiode/penjualan-perkas",
+            icon: faCircle,
+          },
+
+          {
+            title: "Penjualan Peruser",
+            link: "laporan/laporan-penjualan-perperiode/penjualan-peruser",
+            icon: faCircle,
+          },
+
+          {
+            title: "Penjualan Perjenis Bayar",
+            link: "laporan/laporan-penjualan-perperiode/penjualan-perjenis-bayar",
+            icon: faCircle,
+          },
+          {
+            title: "Penjualan pervoucher",
+            link: "laporan/laporan-penjualan-perperiode/penjualan-pervoucher",
+            icon: faCircle,
+          },
+          {
+            title: "Penjualan Perhari",
+            link: "laporan/laporan-penjualan-perperiode/penjualan-perhari",
+            icon: faCircle,
+          },
+          {
+            title: "Penjualan Perbulan",
+            link: "laporan/laporan-penjualan-perperiode/penjualan-perbulan",
+            icon: faCircle,
+          },
+          {
+            title: "Penjualan Pertahun",
+            link: "laporan/laporan-penjualan-perperiode/penjualan-pertahun",
             icon: faCircle,
           },
           {
@@ -66,13 +98,18 @@ export const menus = [
         ],
       },
       {
-        title: "Pembelian Perperiode",
+        title: "Pembelian",
         link: "laporan/laporan-pembelian-perperiode",
         icon: faDotCircle,
         subMenu: [
           {
-            title: "Pembelian Persupllier",
-            link: "laporan/laporan-pembelian-perperiode/pembelian-persupplier",
+            title: "Pembelian Pernota",
+            link: "laporan/laporan-pembelian-perperiode/pembelian-pernota",
+            icon: faCircle,
+          },
+          {
+            title: "Pembelian Persupplier",
+            link: "laporan/laporan-pembelian-perperiode/pembelian-persupplier-perdivisi",
             icon: faCircle,
           },
           {
@@ -91,8 +128,28 @@ export const menus = [
             icon: faCircle,
           },
           {
-            title: "Pembelian Perbarang",
-            link: "laporan/laporan-pembelian-perperiode/pembelian-perbarang",
+            title: "Pembelian Perjenis Bayar",
+            link: "laporan/laporan-pembelian-perperiode/pembelian-perjenis-bayar",
+            icon: faCircle,
+          },
+          {
+            title: "Pembelian Perhari",
+            link: "laporan/laporan-pembelian-perperiode/pembelian-perhari",
+            icon: faCircle,
+          },
+          {
+            title: "Pembelian Perbulan",
+            link: "laporan/laporan-pembelian-perperiode/pembelian-perbulan",
+            icon: faCircle,
+          },
+          {
+            title: "Pembelian Pertahun",
+            link: "laporan/laporan-pembelian-perperiode/pembelian-pertahun",
+            icon: faCircle,
+          },
+          {
+            title: "Pembelian Perbarang Perdivisi",
+            link: "laporan/laporan-pembelian-perperiode/pembelian-perbarang-perdivisi",
             icon: faCircle,
           },
         ],
@@ -112,11 +169,6 @@ export const menus = [
             link: "laporan/laporan-inventori/stok-akhir-perbarang",
             icon: faCircle,
           },
-          {
-            title: "Stok Akhir Perbarang Perdivisi",
-            link: "laporan/laporan-inventori/stok-akhir-perbarang-perdivisi",
-            icon: faCircle,
-          },
         ],
       },
       {
@@ -125,8 +177,8 @@ export const menus = [
         icon: faDotCircle,
         subMenu: [
           {
-            title: "Biaya Perkas",
-            link: "laporan/laporan-biaya/biaya-perkas",
+            title: "Biaya Pernota",
+            link: "laporan/laporan-biaya/biaya-pernota",
             icon: faCircle,
           },
           {
@@ -135,8 +187,38 @@ export const menus = [
             icon: faCircle,
           },
           {
+            title: "Biaya Perkas",
+            link: "laporan/laporan-biaya/biaya-perkas",
+            icon: faCircle,
+          },
+          {
+            title: "Biaya Peruser",
+            link: "laporan/laporan-biaya/biaya-peruser",
+            icon: faCircle,
+          },
+          {
             title: "Biaya Perjenis Biaya",
             link: "laporan/laporan-biaya/biaya-perjenis-biaya",
+            icon: faCircle,
+          },
+          {
+            title: "Biaya Perjenis Bayar",
+            link: "laporan/laporan-biaya/biaya-perjenis-bayar",
+            icon: faCircle,
+          },
+          {
+            title: "Biaya Perhari",
+            link: "laporan/laporan-biaya/biaya-perhari",
+            icon: faCircle,
+          },
+          {
+            title: "Biaya Perbulan",
+            link: "laporan/laporan-biaya/biaya-perbulan",
+            icon: faCircle,
+          },
+          {
+            title: "Biaya Pertahun",
+            link: "laporan/laporan-biaya/biaya-pertahun",
             icon: faCircle,
           },
         ],
@@ -147,8 +229,8 @@ export const menus = [
         icon: faDotCircle,
         subMenu: [
           {
-            title: "Pendapatan Perkas",
-            link: "laporan/laporan-pendapatan/pendapatan-perkas",
+            title: "Pendapatan Pernota",
+            link: "laporan/laporan-Pendapatan/pendapatan-pernota",
             icon: faCircle,
           },
           {
@@ -157,8 +239,38 @@ export const menus = [
             icon: faCircle,
           },
           {
-            title: "Pendapatan Perjenis pendapatan",
+            title: "Pendapatan Perkas",
+            link: "laporan/laporan-pendapatan/pendapatan-perkas",
+            icon: faCircle,
+          },
+          {
+            title: "Pendapatan Peruser",
+            link: "laporan/laporan-pendapatan/pendapatan-peruser",
+            icon: faCircle,
+          },
+          {
+            title: "Pendapatan Perjenis Pendapatan",
             link: "laporan/laporan-pendapatan/pendapatan-perjenis-pendapatan",
+            icon: faCircle,
+          },
+          {
+            title: "Pendapatan Perjenis Bayar",
+            link: "laporan/laporan-pendapatan/pendapatan-perjenis-bayar",
+            icon: faCircle,
+          },
+          {
+            title: "Pendapatan Perhari",
+            link: "laporan/laporan-pendapatan/pendapatan-perhari",
+            icon: faCircle,
+          },
+          {
+            title: "Pendapatan Perbulan",
+            link: "laporan/laporan-pendapatan/pendapatan-perbulan",
+            icon: faCircle,
+          },
+          {
+            title: "Pendapatan Pertahun",
+            link: "laporan/laporan-pendapatan/pendapatan-pertahun",
             icon: faCircle,
           },
         ],

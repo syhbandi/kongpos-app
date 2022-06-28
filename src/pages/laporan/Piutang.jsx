@@ -1,9 +1,5 @@
-const Piutang_penjualan = () => {
-    return (
-        <div>
-            Laporan Piutang Penjualan
-        </div>
-    )
-}
+const Piutang = () => {
+  return <div>Laporan Piutang Penjualan</div>;
+};
 
-export {Piutang_penjualan}
+export default Piutang;

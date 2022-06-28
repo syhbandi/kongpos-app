@@ -10,12 +10,12 @@ import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import Table from "../../components/Table";
 import {
-  getBiaya,
-  getBiayaCount,
+  getPembelian,
+  getPembelianCount,
   reset,
-} from "../../features/laporanBiayaSlice";
+} from "../../features/laporanPembelianSlice";
 
-const Biaya = ({ jenis }) => {
+const Pembelian = ({ jenis }) => {
   const dispatch = useDispatch();
   const initialState = {
     company_id: "comp2020110310015601",
@@ -32,7 +32,7 @@ const Biaya = ({ jenis }) => {
   const [formData, setFormData] = useState(initialState);
   const [page, setPage] = useState(0);
   const { data, status, message, dataCount } = useSelector(
-    (state) => state.laporanBiaya
+    (state) => state.laporanPembelian
   );
 
   const handleFormChange = (e) => {
@@ -44,16 +44,16 @@ const Biaya = ({ jenis }) => {
 
   const handleReset = () => {
     setFormData(initialState);
-    dispatch(getBiaya(initialState));
-    dispatch(getBiayaCount({ ...initialState, count_stats: 1 }));
+    dispatch(getPembelian(initialState));
+    dispatch(getPembelianCount({ ...initialState, count_stats: 1 }));
     setPage(0);
   };
 
   const handleFilter = (e) => {
     e.preventDefault();
     setFormData((prevState) => ({ ...prevState, limit: 0 }));
-    dispatch(getBiaya({ ...formData, limit: 0 }));
-    dispatch(getBiayaCount({ ...formData, count_stats: 1, limit: 0 }));
+    dispatch(getPembelian({ ...formData, limit: 0 }));
+    dispatch(getPembelianCount({ ...formData, count_stats: 1, limit: 0 }));
     setPage(0);
   };
 
@@ -64,7 +64,7 @@ const Biaya = ({ jenis }) => {
       limit: 0,
     }));
     dispatch(
-      getBiaya({ ...formData, [e.target.id]: e.target.value, limit: 0 })
+      getPembelian({ ...formData, [e.target.id]: e.target.value, limit: 0 })
     );
     setPage(0);
   };
@@ -77,7 +77,7 @@ const Biaya = ({ jenis }) => {
       limit: 0,
     }));
     dispatch(
-      getBiaya({ ...formData, order_col: col, order_type: type, limit: 0 })
+      getPembelian({ ...formData, order_col: col, order_type: type, limit: 0 })
     );
     setPage(0);
   };
@@ -85,14 +85,14 @@ const Biaya = ({ jenis }) => {
   const handlePaginate = (e) => {
     const newOffset = (e.selected * formData.length) % dataCount;
     setFormData((prevState) => ({ ...prevState, limit: newOffset }));
-    dispatch(getBiaya({ ...formData, limit: newOffset }));
+    dispatch(getPembelian({ ...formData, limit: newOffset }));
     setPage(e.selected);
   };
 
   useEffect(() => {
     setFormData(initialState);
-    dispatch(getBiaya(initialState));
-    dispatch(getBiayaCount({ ...initialState, count_stats: 1 }));
+    dispatch(getPembelian(initialState));
+    dispatch(getPembelianCount({ ...initialState, count_stats: 1 }));
 
     return () => {
       dispatch(reset());
@@ -175,4 +175,5 @@ const Biaya = ({ jenis }) => {
     </div>
   );
 };
-export default Biaya;
+
+export default Pembelian;

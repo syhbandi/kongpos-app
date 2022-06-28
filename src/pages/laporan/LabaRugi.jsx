@@ -1,9 +1,5 @@
-const Laba_rugi = () => {
-    return (
-        <div>
-            Laporan Laba Rugi
-        </div>
-    )
-}
+const LabaRugi = () => {
+  return <div>Laporan Laba Rugi</div>;
+};
 
-export {Laba_rugi}
+export default LabaRugi;
