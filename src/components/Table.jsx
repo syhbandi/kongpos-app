@@ -33,6 +33,10 @@ const Table = (props) => {
 
   const headers =
     data && data.length > 0 ? Object.keys(data[0]).map((value) => value) : null;
+  const totalPerPage =
+    data && data.length > 0
+      ? data.reduce((total, current) => (total += current["Total"]), 0)
+      : 0;
 
   const handleColClick = (value) => {
     let newOrder = { ...order };
@@ -47,6 +51,17 @@ const Table = (props) => {
     }
     setOrder(newOrder);
     handleSort(newOrder.col, newOrder.type);
+  };
+
+  const formatNumber = (number, jenis = null) => {
+    if (!jenis) {
+      return new Intl.NumberFormat("id").format(number);
+    }
+
+    return new Intl.NumberFormat("id", {
+      style: "currency",
+      currency: "IDR",
+    }).format(number);
   };
 
   useEffect(() => {
@@ -96,7 +111,7 @@ const Table = (props) => {
 
       {data && data.length > 0 ? (
         <table className="w-full border-collapse">
-          <thead className="bg-white">
+          <thead className="bg-white select-none">
             <tr>
               <th className="border border-gray-500">NO</th>
               {headers.map((value, index) => (
@@ -136,13 +151,36 @@ const Table = (props) => {
                   {index + offset + 1}
                 </td>
                 {headers.map((value, index) => (
-                  <td className=" px-4 py-3 border border-gray-500" key={index}>
-                    {result[value]}
+                  <td
+                    className={`px-4 py-3 border border-gray-500 ${
+                      !isNaN(result[value]) ? "text-right" : ""
+                    }`}
+                    key={index}
+                  >
+                    {!isNaN(result[value])
+                      ? formatNumber(
+                          result[value],
+                          value === "Total" ? "currency" : null
+                        )
+                      : result[value]}
                   </td>
                 ))}
               </tr>
             ))}
           </tbody>
+          <tfoot>
+            <tr>
+              <td
+                colSpan={headers.length}
+                className="px-4 py-2 border border-gray-500 text-right font-bold uppercase"
+              >
+                Total
+              </td>
+              <td className="px-4 py-2 border border-gray-500 text-right">
+                {formatNumber(totalPerPage, "currency")}
+              </td>
+            </tr>
+          </tfoot>
         </table>
       ) : (
         <div className="w-full text-center mt-5">
