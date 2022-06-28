@@ -10,7 +10,7 @@ const Sidebar = ({ open, openMobile, setOpenMobile, setTitle }) => {
 
   return (
     <div
-      className={`z-20 fixed  md:left-0 w-72 h-screen bg-white shadow-xl transition-all ease-in-out duration-300 ${
+      className={`z-20 fixed flex flex-col md:left-0 w-72 h-screen bg-white shadow-xl transition-all ease-in-out duration-300 ${
         !open ? "md:w-20" : "md:w-72"
       } ${!openMobile ? "left-[-100vw]" : "left-0"}`}
     >
@@ -38,7 +38,7 @@ const Sidebar = ({ open, openMobile, setOpenMobile, setTitle }) => {
       </div>
 
       {/* sidebar menus */}
-      <ul className="p-5 pr-3 flex flex-col h-full overflow-auto">
+      <ul className="px-5 py-3 flex flex-col h-full overflow-auto">
         {menus.map((menu, index) => (
           <SidebarMenu
             menu={menu}
