@@ -5,7 +5,7 @@ const initialState = {
   data: null,
   status: "",
   message: "",
-  dataCount: 0,
+  dataCount: null,
 };
 
 export const getPenjualan = createAsyncThunk(
@@ -63,7 +63,7 @@ const laporanPenjualanSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(getPenjualanCount.fulfilled, (state, action) => {
-        state.dataCount = action.payload.jumlah_record;
+        state.dataCount = action.payload;
         state.status = "";
       });
   },

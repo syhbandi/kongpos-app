@@ -114,9 +114,9 @@ const Table = (props) => {
         <table className="w-full border-collapse">
           <thead className="bg-white select-none">
             <tr>
-              <th className="border border-gray-500">NO</th>
+              <th className="border border-gray-400">NO</th>
               {headers.map((value, index) => (
-                <th key={index} className="border border-gray-500">
+                <th key={index} className="border border-gray-400">
                   <button
                     className="flex items-center justify-between w-full px-4 py-3"
                     id={value}
@@ -148,12 +148,12 @@ const Table = (props) => {
                 key={index}
                 className="hover:bg-gray-100 bg-white cursor-pointer"
               >
-                <td className="px-4 py-3 border border-gray-500 text-center">
+                <td className="px-4 py-3 border border-gray-400 text-center">
                   {index + offset + 1}
                 </td>
                 {headers.map((value, index) => (
                   <td
-                    className={`px-4 py-3 border border-gray-500 ${
+                    className={`px-4 py-3 border border-gray-400 ${
                       !isNaN(result[value]) ? "text-right" : ""
                     }`}
                     key={index}
@@ -179,7 +179,7 @@ const Table = (props) => {
                     >
                       {col}
                     </td>
-                    <td className="px-4 py-2 border border-gray-500 text-right">
+                    <td className="px-4 py-2 border border-gray-400 text-right">
                       {formatNumber(
                         data.reduce(
                           (total, current) => (total += current[col]),
@@ -206,14 +206,31 @@ const Table = (props) => {
 
       {/* footer */}
       <div className="flex flex-col md:flex-row items-center mt-5">
-        <div className="font-bold">Total data: {dataCount}</div>
+        <div className="flex flex-col md:flex-row font-bold flex-grow gap-5">
+          {dataCount &&
+            Object.keys(dataCount).map((item) => (
+              <div className="flex gap-3">
+                <span>{item} : </span>
+                <span>
+                  {formatNumber(
+                    dataCount[item],
+                    item.includes("Total") || item.includes("Sisa")
+                      ? true
+                      : false
+                  )}
+                </span>
+              </div>
+            ))}
+        </div>
         <div className="ml-auto">
           <ReactPaginate
             forcePage={page}
             previousLabel={"<<"}
             nextLabel={">>"}
             breakLabel={"..."}
-            pageCount={Math.ceil(dataCount && dataCount / length)}
+            pageCount={Math.ceil(
+              dataCount["Jumlah Record"] && dataCount["Jumlah Record"] / length
+            )}
             marginPagesDisplayed={2}
             pageRangeDisplayed={3}
             onPageChange={handlePaginate}
@@ -221,16 +238,16 @@ const Table = (props) => {
               "inline-flex items-center select-none border-collapse"
             }
             pageLinkClassName={
-              "p-3 bg-white font-medium border-y border-gray-500 text-blue-700 hover:bg-gray-200"
+              "p-3 bg-white font-medium border-y border-gray-400 text-blue-700 hover:bg-gray-200"
             }
             previousLinkClassName={
-              "rounded-l-lg p-3 bg-white font-medium border-y border-l border-gray-500 text-blue-700 hover:bg-gray-200"
+              "rounded-l-lg p-3 bg-white font-medium border-y border-l border-gray-400 text-blue-700 hover:bg-gray-200"
             }
             nextLinkClassName={
-              "p-3 bg-white font-medium border-y border-r border-gray-500 text-blue-700 rounded-r-lg hover:bg-gray-200"
+              "p-3 bg-white font-medium border-y border-r border-gray-400 text-blue-700 rounded-r-lg hover:bg-gray-200"
             }
             breakLinkClassName={
-              "p-3 bg-white font-medium border-y border-gray-500 text-blue-700 hover:bg-gray-200"
+              "p-3 bg-white font-medium border-y border-gray-400 text-blue-700 hover:bg-gray-200"
             }
             activeLinkClassName="bg-blue-700 text-yellow-400 hover:bg-blue-700"
             renderOnZeroPageCount={null}
