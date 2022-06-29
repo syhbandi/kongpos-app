@@ -77,7 +77,8 @@ const Penjualan = ({ jenis }) => {
   };
 
   const handlePaginate = (e) => {
-    const newOffset = (e.selected * formData.length) % dataCount;
+    const jumlahRecord = dataCount ? dataCount["Jumlah Record"] : 0;
+    const newOffset = (e.selected * formData.length) % jumlahRecord;
     setFormData((prevState) => ({ ...prevState, limit: newOffset }));
     dispatch(getPenjualan({ ...formData, limit: newOffset }));
     setPage(e.selected);

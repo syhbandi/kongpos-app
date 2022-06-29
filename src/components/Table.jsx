@@ -172,7 +172,7 @@ const Table = (props) => {
           <tfoot>
             {sumColumn && sumColumn.length > 0
               ? sumColumn.map((col, index) => (
-                  <tr>
+                  <tr key={index}>
                     <td
                       colSpan={headers.length}
                       className="px-4 py-2 text-right font-bold uppercase"
