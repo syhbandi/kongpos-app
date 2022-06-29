@@ -208,8 +208,8 @@ const Table = (props) => {
       <div className="flex flex-col md:flex-row items-center mt-5">
         <div className="flex flex-col md:flex-row font-bold flex-grow gap-5">
           {dataCount &&
-            Object.keys(dataCount).map((item) => (
-              <div className="flex gap-3">
+            Object.keys(dataCount).map((item, index) => (
+              <div className="flex gap-3" key={index}>
                 <span>{item} : </span>
                 <span>
                   {formatNumber(
@@ -228,9 +228,14 @@ const Table = (props) => {
             previousLabel={"<<"}
             nextLabel={">>"}
             breakLabel={"..."}
-            pageCount={Math.ceil(
-              dataCount["Jumlah Record"] && dataCount["Jumlah Record"] / length
-            )}
+            pageCount={
+              dataCount
+                ? Math.ceil(
+                    dataCount["Jumlah Record"] &&
+                      dataCount["Jumlah Record"] / length
+                  )
+                : 0
+            }
             marginPagesDisplayed={2}
             pageRangeDisplayed={3}
             onPageChange={handlePaginate}
