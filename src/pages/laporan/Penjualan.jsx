@@ -153,6 +153,7 @@ const Penjualan = ({ jenis }) => {
           dataCount={dataCount}
           handlePaginate={handlePaginate}
           page={page}
+          sumColumn={["Total", "Jumlah Item"]}
         />
       </div>
 

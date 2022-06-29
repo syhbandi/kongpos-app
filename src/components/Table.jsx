@@ -24,6 +24,7 @@ const Table = (props) => {
     dataCount,
     handlePaginate,
     page,
+    sumColumn,
   } = props;
 
   const [order, setOrder] = useState({
@@ -53,8 +54,8 @@ const Table = (props) => {
     handleSort(newOrder.col, newOrder.type);
   };
 
-  const formatNumber = (number, jenis = null) => {
-    if (!jenis) {
+  const formatNumber = (number, currency = false) => {
+    if (!currency) {
       return new Intl.NumberFormat("id").format(number);
     }
 
@@ -160,7 +161,7 @@ const Table = (props) => {
                     {!isNaN(result[value])
                       ? formatNumber(
                           result[value],
-                          value === "Total" ? "currency" : null
+                          value === "Total" ? true : false
                         )
                       : result[value]}
                   </td>
@@ -169,17 +170,29 @@ const Table = (props) => {
             ))}
           </tbody>
           <tfoot>
-            <tr>
-              <td
-                colSpan={headers.length}
-                className="px-4 py-2 border border-gray-500 text-right font-bold uppercase"
-              >
-                Total
-              </td>
-              <td className="px-4 py-2 border border-gray-500 text-right">
-                {formatNumber(totalPerPage, "currency")}
-              </td>
-            </tr>
+            {sumColumn && sumColumn.length > 0
+              ? sumColumn.map((col, index) => (
+                  <tr>
+                    <td
+                      colSpan={headers.length}
+                      className="px-4 py-2 text-right font-bold uppercase"
+                    >
+                      {col}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-500 text-right">
+                      {formatNumber(
+                        data.reduce(
+                          (total, current) => (total += current[col]),
+                          0
+                        ),
+                        col.includes("Total") || col.includes("Sisa")
+                          ? true
+                          : false
+                      )}
+                    </td>
+                  </tr>
+                ))
+              : null}
           </tfoot>
         </table>
       ) : (
