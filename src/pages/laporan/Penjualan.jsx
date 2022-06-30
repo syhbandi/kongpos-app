@@ -9,7 +9,7 @@ import {
   reset,
 } from "../../features/laporanPenjualanSlice";
 
-const Penjualan = ({ jenis }) => {
+const Penjualan = ({ jenis, sumColumn }) => {
   const dispatch = useDispatch();
   const initialState = {
     company_id: "comp2020110310015601",
@@ -154,7 +154,7 @@ const Penjualan = ({ jenis }) => {
           dataCount={dataCount}
           handlePaginate={handlePaginate}
           page={page}
-          sumColumn={["Total", "Jumlah Item"]}
+          sumColumn={sumColumn}
         />
       </div>
 

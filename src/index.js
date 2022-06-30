@@ -42,11 +42,21 @@ root.render(
               <Route path="laporan-penjualan-perperiode">
                 <Route
                   path="penjualan-pernota"
-                  element={<Penjualan jenis={"1"} />}
+                  element={
+                    <Penjualan
+                      jenis={"1"}
+                      sumColumn={["Total", "Jumlah Item"]}
+                    />
+                  }
                 />
                 <Route
                   path="penjualan-percustomer"
-                  element={<Penjualan jenis={"2"} />}
+                  element={
+                    <Penjualan
+                      jenis={"2"}
+                      sumColumn={["Total", "Jumlah Nota"]}
+                    />
+                  }
                 />
                 <Route
                   path="penjualan-perdivisi"
