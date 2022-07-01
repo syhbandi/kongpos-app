@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import laporanHutangAPI from "./laporanHutangAPI";
+import laporanPiutangAPI from "./laporanPiutangAPI";
 
 const initialState = {
   data: null,
@@ -8,29 +8,29 @@ const initialState = {
   dataCount: 0,
 };
 
-export const getHutang = createAsyncThunk(
-  "laporanHutang/getHutang",
+export const getPiutang = createAsyncThunk(
+  "laporanPiutang/getPiutang",
   async (data, thunAPI) => {
     try {
-      return await laporanHutangAPI.getHutang(data);
+      return await laporanPiutangAPI.getPiutang(data);
     } catch (error) {
       return thunAPI.rejectWithValue("Ada galat saat mengambil data");
     }
   }
 );
-export const getHutangCount = createAsyncThunk(
-  "laporanHutang/getHutangCount",
+export const getPiutangCount = createAsyncThunk(
+  "laporanPiutang/getPiutangCount",
   async (data, thunAPI) => {
     try {
-      return await laporanHutangAPI.getHutang(data);
+      return await laporanPiutangAPI.getPiutang(data);
     } catch (error) {
       return thunAPI.rejectWithValue("Ada galat saat mengambil data");
     }
   }
 );
 
-const laporanHutangSlice = createSlice({
-  name: "laporanHutang",
+const laporanPiutangSlice = createSlice({
+  name: "laporanPiutang",
   initialState,
   reducers: {
     reset: (state, action) => {
@@ -43,31 +43,31 @@ const laporanHutangSlice = createSlice({
   extraReducers: (builder) => {
     // track perjalanan dari request getPenjualan
     builder
-      .addCase(getHutang.pending, (state, action) => {
+      .addCase(getPiutang.pending, (state, action) => {
         state.status = "pending";
       })
-      .addCase(getHutang.rejected, (state, action) => {
+      .addCase(getPiutang.rejected, (state, action) => {
         state.status = "rejected";
         state.message = action.payload;
       })
-      .addCase(getHutang.fulfilled, (state, action) => {
+      .addCase(getPiutang.fulfilled, (state, action) => {
         state.data = action.payload;
         state.status = "";
       });
     builder
-      .addCase(getHutangCount.pending, (state, action) => {
+      .addCase(getPiutangCount.pending, (state, action) => {
         state.status = "pending";
       })
-      .addCase(getHutangCount.rejected, (state, action) => {
+      .addCase(getPiutangCount.rejected, (state, action) => {
         state.status = "rejected";
         state.message = action.payload;
       })
-      .addCase(getHutangCount.fulfilled, (state, action) => {
+      .addCase(getPiutangCount.fulfilled, (state, action) => {
         state.dataCount = action.payload.jumlah_record;
         state.status = "";
       });
   },
 });
 
-export const { reset } = laporanHutangSlice.actions;
-export default laporanHutangSlice.reducer;
+export const { reset } = laporanPiutangSlice.actions;
+export default laporanPiutangSlice.reducer;

@@ -4,6 +4,9 @@ import laporanPenjualanReducer from "../features/laporanPenjualanSlice";
 import laporanPembelianReducer from "../features/laporanPembelianSlice";
 import laporanBiayaReducer from "../features/laporanBiayaSlice";
 import laporanPendapatanReducer from "../features/laporanPendapatanSlice";
+import laporanHutangReducer from "../features/laporanHutangSlice";
+import laporanPiutangReducer from "../features/laporanPiutangSlice";
+import laporanInventoriReducer from "../features/laporanInventoriSLice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +15,8 @@ export const store = configureStore({
     laporanPembelian: laporanPembelianReducer,
     laporanBiaya: laporanBiayaReducer,
     laporanPendapatan: laporanPendapatanReducer,
+    laporanHutang: laporanHutangReducer,
+    laporanPiutang: laporanPiutangReducer,
+    laporanInventori: laporanInventoriReducer,
   },
 });

@@ -182,7 +182,8 @@ const Table = (props) => {
                     <td className="px-4 py-2 border border-gray-400 text-right">
                       {formatNumber(
                         data.reduce(
-                          (total, current) => (total += current[col]),
+                          (total, current) =>
+                            (total += parseFloat(current[col])),
                           0
                         ),
                         col.includes("Total") || col.includes("Sisa")

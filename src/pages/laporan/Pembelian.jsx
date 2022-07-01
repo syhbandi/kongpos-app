@@ -15,7 +15,7 @@ import {
   reset,
 } from "../../features/laporanPembelianSlice";
 
-const Pembelian = ({ jenis }) => {
+const Pembelian = ({ jenis, sumColumn = [] }) => {
   const dispatch = useDispatch();
   const initialState = {
     company_id: "comp2020110310015601",
@@ -159,6 +159,7 @@ const Pembelian = ({ jenis }) => {
           dataCount={dataCount}
           handlePaginate={handlePaginate}
           page={page}
+          sumColumn={["Total", ...sumColumn]}
         />
       </div>
 
