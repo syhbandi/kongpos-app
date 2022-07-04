@@ -2,14 +2,22 @@ import axios from "axios";
 
 const url = "http://misterkong.com/kong_api/pos/api/auth/login";
 
-async function login(no_hp, passwd) {
-  const getData = await axios.post(url, {
-    no_hp: no_hp,
-    passwd: passwd,
+const login = async (no_hp, passwd) => {
+  const get = await axios.post(url, {
+    no_hp,
+    passwd,
   });
-  console.log(getData);
-  //   localStorage.setItem("token", JSON.stringify(getData.data.access_token));
-  //   return getData.data.access_token;
-}
+  localStorage.setItem("user", get.data);
+  return get.data;
+};
 
-export const authService = { login };
+const logout = () => {
+  localStorage.removeItem("user");
+};
+
+const authService = {
+  login,
+  logout,
+};
+
+export default authService;
