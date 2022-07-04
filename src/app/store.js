@@ -7,6 +7,7 @@ import laporanPendapatanReducer from "../features/laporanPendapatanSlice";
 import laporanHutangReducer from "../features/laporanHutangSlice";
 import laporanPiutangReducer from "../features/laporanPiutangSlice";
 import laporanInventoriReducer from "../features/laporanInventoriSLice";
+import authReducer from "../features/auth";
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     laporanHutang: laporanHutangReducer,
     laporanPiutang: laporanPiutangReducer,
     laporanInventori: laporanInventoriReducer,
+    auth: authReducer,
   },
 });

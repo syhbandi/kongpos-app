@@ -1,9 +1,33 @@
+import axios from "axios";
 import { useState } from "react";
 import logoKongpos from "../assets/logo-kongpos-app.png";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../features/auth";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const onSubmit = (e) => {};
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // let dtToken = [];
+
+  // function setToken(token) {
+  //   localStorage.setItem("tokenJson", JSON.stringify(token));
+  // }
+
+  // function getToken(value) {
+  //   dtToken = JSON.parse(localStorage.getItem(value));
+  //   console.log("token" + dtToken);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(user);
+    console.log(password);
+    dispatch(login({ user, password }));
+    // navigate("/");
+  };
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen bg-red-50">
       <div className="flex flex-col gap-5 items-center mb-7">
