@@ -14,11 +14,19 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
-const getUsahas = async () => {};
+const getUsahas = async (noHp) => {
+  const usahas = await api.post("login_get_cid", {
+    no_hp: noHp,
+  });
+
+  // console.log(usahas.data);
+  return usahas.data;
+};
 
 const authService = {
   login,
   logout,
+  getUsahas,
 };
 
 export default authService;

@@ -23,6 +23,22 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   authService.logout();
 });
 
+export const getUsahas = createAsyncThunk(
+  "auth/getUsahas",
+  async (data, thunkAPI) => {
+    const noHp = thunkAPI.getState().auth.user.no_hp;
+    try {
+      return await authService.getUsahas(noHp);
+    } catch (error) {
+      const message =
+        (error.response && error.response.data && error.response.data.error) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -31,6 +47,13 @@ const authSlice = createSlice({
       state.user = null;
       state.status = null;
       state.message = null;
+    },
+    setUsaha: (state, action) => {
+      state.user = { ...state.user, usaha: action.payload };
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...state.user, usaha: action.payload })
+      );
     },
   },
   extraReducers: (builder) => {
@@ -52,8 +75,22 @@ const authSlice = createSlice({
     builder.addCase(logout.fulfilled, (state) => {
       state.user = null;
     });
+
+    builder
+      .addCase(getUsahas.pending, (state) => {
+        state.status = "pending";
+        state.message = "";
+      })
+      .addCase(getUsahas.rejected, (state, action) => {
+        state.status = "rejected";
+        state.message = action.payload;
+      })
+      .addCase(getUsahas.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        state.message = "";
+      });
   },
 });
 
-export const { reset } = authSlice.actions;
+export const { reset, setUsaha } = authSlice.actions;
 export default authSlice.reducer;

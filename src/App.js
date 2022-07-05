@@ -12,7 +12,6 @@ function App() {
   const [openMobile, setOpenMobile] = useState(false);
   const [title, setTitle] = useState("");
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
 
   if (!user) {
     return <Navigate to={"/login"} />;
