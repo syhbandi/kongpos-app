@@ -6,6 +6,16 @@ import {
   faCircle,
   faChevronRight,
   faDotCircle,
+  faStore,
+  faChartBar,
+  faChartColumn,
+  faShoppingCart,
+  faCreditCard,
+  faMoneyCheckDollar,
+  faCommentDollar,
+  faCommentsDollar,
+  faHandshake,
+  faHandHoldingDollar,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const menus = [
@@ -31,7 +41,7 @@ export const menus = [
       {
         title: "Penjualan",
         link: "laporan/laporan-penjualan-perperiode",
-        icon: faDotCircle,
+        icon: faChartColumn,
         subMenu: [
           {
             title: "Penjualan Pernota",
@@ -100,7 +110,7 @@ export const menus = [
       {
         title: "Pembelian",
         link: "laporan/laporan-pembelian-perperiode",
-        icon: faDotCircle,
+        icon: faShoppingCart,
         subMenu: [
           {
             title: "Pembelian Pernota",
@@ -157,7 +167,7 @@ export const menus = [
       {
         title: "Inventori",
         link: "laporan/laporan-inventori",
-        icon: faDotCircle,
+        icon: faStore,
         subMenu: [
           {
             title: "Stok Akhir Perperiode",
@@ -174,7 +184,7 @@ export const menus = [
       {
         title: "Biaya",
         link: "laporan/laporan-biaya",
-        icon: faDotCircle,
+        icon: faMoneyCheckDollar,
         subMenu: [
           {
             title: "Biaya Pernota",
@@ -226,7 +236,7 @@ export const menus = [
       {
         title: "Pendapatan",
         link: "laporan/laporan-pendapatan",
-        icon: faDotCircle,
+        icon: faCommentsDollar,
         subMenu: [
           {
             title: "Pendapatan Pernota",
@@ -278,7 +288,7 @@ export const menus = [
       {
         title: "Hutang",
         link: "laporan/laporan-hutang",
-        icon: faDotCircle,
+        icon: faCreditCard,
         subMenu: [
           {
             title: "Hutang Pembelian",
@@ -290,7 +300,7 @@ export const menus = [
       {
         title: "Piutang",
         link: "laporan/laporan-piutang",
-        icon: faDotCircle,
+        icon: faHandHoldingDollar,
         subMenu: [
           {
             title: "Piutang Penjualan",
@@ -309,6 +319,6 @@ export const menus = [
   {
     title: "kontrak",
     link: "kontrak",
-    icon: faContactBook,
+    icon: faHandshake,
   },
 ];
