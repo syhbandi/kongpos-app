@@ -9,7 +9,7 @@ const initialState = {
 
 export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
   try {
-    return await authService.login(data.no_hp, data.password);
+    return await authService.login(data.noHp, data.password);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.error) ||
@@ -44,7 +44,7 @@ const authSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.token = action.payload;
+        state.user = action.payload;
         state.status = "fulfilled";
         state.message = "";
       });

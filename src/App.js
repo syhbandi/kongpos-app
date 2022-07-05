@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Breadcrumb from "./components/Breadcrumb";
 import Footer from "./components/Footer";
 import { Navbar } from "./components/Navbar";
@@ -10,6 +11,12 @@ function App() {
   const [open, setOpen] = useState(true);
   const [openMobile, setOpenMobile] = useState(false);
   const [title, setTitle] = useState("");
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+
+  if (!user) {
+    return <Navigate to={"/login"} />;
+  }
 
   return (
     <div
