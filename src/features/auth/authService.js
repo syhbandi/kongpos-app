@@ -1,10 +1,7 @@
-import axios from "axios";
-
-const url = "http://misterkong.com/kong_api/pos/api/auth/login";
+import api from "../../app/api.config";
 
 const login = async (no_hp, passwd) => {
-  console.log(no_hp, passwd);
-  const get = await axios.post(url, {
+  const get = await api.post("auth/login", {
     no_hp,
     passwd,
   });
@@ -16,6 +13,8 @@ const login = async (no_hp, passwd) => {
 const logout = () => {
   localStorage.removeItem("user");
 };
+
+const getUsahas = async () => {};
 
 const authService = {
   login,

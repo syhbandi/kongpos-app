@@ -39,12 +39,15 @@ const Login = () => {
             Daftar
           </span>
         </div>
+
+        {/* kalo login gagal */}
         {status === "rejected" && (
           <div className="rounded-lg p-4 bg-red-400 bg-opacity-30 font-medium text-red-700 mb-3">
             <FontAwesomeIcon icon={faExclamationCircle} className="mr-3" />
             {message}
           </div>
         )}
+
         <form className="flex flex-col gap-3" onSubmit={onSubmit}>
           <input
             type="text"

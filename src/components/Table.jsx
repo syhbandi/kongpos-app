@@ -96,7 +96,7 @@ const Table = (props) => {
               type="search"
               id="search"
               placeholder="Cari"
-              className="w-full md:w-56 outline-0 px-3 py-2 border border-gray-500 rounded-l-lg"
+              className="w-full md:w-56 outline-0 px-3 py-2 border border-gray-500 rounded-l-lg focus:border-blue-700 bg-gray-100 focus:bg-white focus:ring focus:ring-blue-50"
               onChange={handleFormChange}
               value={search}
             />
