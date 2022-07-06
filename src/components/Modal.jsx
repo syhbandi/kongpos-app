@@ -17,7 +17,7 @@ const Modal = ({ open, setOpen, children, modalHeader }) => {
         onClick={handleClose}
       >
         {/* dialog */}
-        <div className="rounded-lg bg-white shadow-lg p-3 w-[500px] max-h-[700px] animate-fadeIn overflow-auto">
+        <div className="rounded-lg bg-white shadow-lg p-3 w-full md:w-[500px] max-h-[700px] animate-fadeIn overflow-auto mx-5 md:mx-0">
           <div className="flex items-center justify-between border-b border-gray-300">
             <h1 className="text-xl font-medium">{modalHeader}</h1>
             <button className="text-2xl" onClick={() => setOpen(false)}>
