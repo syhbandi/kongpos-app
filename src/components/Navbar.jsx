@@ -4,21 +4,24 @@ import {
   faCaretDown,
   faEnvelope,
   faSearch,
+  faSignOutAlt,
   faStoreAlt,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsahas, setUsaha } from "../features/auth";
+import { getUsahas, logout, setUsaha } from "../features/auth";
 import Modal from "./Modal";
+import { Menu } from "@headlessui/react";
+import Dropdown from "./Dropdown";
 
 export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
   const [modalUsaha, setModalUsaha] = useState(false);
   const [usahas, setUsahas] = useState([]);
 
   const dispatch = useDispatch();
-
   const { status, message, user } = useSelector((state) => state.auth);
 
   const handleGetUsahas = async () => {
@@ -34,16 +37,33 @@ export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
     setModalUsaha(false);
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   useEffect(() => {
     if (!user.usaha) {
       handleGetUsahas();
     }
   }, [user]);
 
+  const menuUser = [
+    {
+      title: "Profil",
+      action: null,
+      icon: faUser,
+    },
+    {
+      title: "logout",
+      action: handleLogout,
+      icon: faSignOutAlt,
+    },
+  ];
+
   return (
     <div
       className={
-        "h-16 px-5 shadow-md flex items-center sticky top-0 bg-white z-10"
+        "h-16 px-5 shadow-md flex items-center sticky top-0 bg-white z-[1]"
       }
     >
       <div
@@ -82,9 +102,33 @@ export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
             <div className="bg-red-600 rounded-full p-1 absolute -right-1 -top-1"></div>
           </li>
           <li>
-            <div className="flex items-center cursor-pointer">
-              <div className="rounded-full bg-gray-600 p-4"></div>
-            </div>
+            <Menu as={"div"} className="relative">
+              <Menu.Button className="flex items-center justify-center cursor-pointer w-10 h-10 rounded-full bg-blue-500">
+                <span className="font-bold text-white">
+                  {user.nama_user.slice(0, 1)}
+                </span>
+              </Menu.Button>
+              <Dropdown>
+                {menuUser.map((menu, index) => (
+                  <Menu.Item key={index}>
+                    {({ active }) => (
+                      <button
+                        className={`${
+                          active ? "bg-blue-700 text-white" : "text-gray-900"
+                        } group flex gap-3 w-full items-center rounded-md px-3 py-2 capitalize`}
+                        onClick={menu.action}
+                      >
+                        <FontAwesomeIcon
+                          icon={menu.icon}
+                          className={active ? "text-white" : "text-gray-500"}
+                        />
+                        {menu.title}
+                      </button>
+                    )}
+                  </Menu.Item>
+                ))}
+              </Dropdown>
+            </Menu>
           </li>
         </ul>
       </div>
