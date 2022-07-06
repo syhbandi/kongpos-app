@@ -5,7 +5,7 @@ import { store } from "./app/store";
 import App from "./App";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Dashboard } from "./pages/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import { Master } from "./pages/master/Index";
 import Laporan from "./pages/Laporan";
 import Kontrak from "./pages/Kontrak";

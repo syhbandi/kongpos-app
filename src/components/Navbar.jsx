@@ -63,7 +63,9 @@ export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
         onClick={handleGetUsahas}
       >
         <FontAwesomeIcon icon={faStoreAlt} className="mr-3" />
-        <div className="font-medium mr-3 hidden md:block">Mane mini resto</div>
+        <div className="font-medium mr-3 hidden md:block">
+          {user.usaha ? user.usaha.nama_usaha : "Pilih Usaha dulu"}
+        </div>
         <FontAwesomeIcon icon={faCaretDown} />
       </div>
       <div className="ml-auto">
@@ -93,6 +95,7 @@ export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
         setOpen={setModalUsaha}
         modalHeader={"Pilih usaha"}
       >
+        {/* sambil nunggu kasi loading */}
         {status === "pending" && (
           <div className="flex justify-center p-4">
             <svg
@@ -113,6 +116,14 @@ export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
             </svg>
           </div>
         )}
+
+        {/* kalo ada error kasi error */}
+        {status === "rejected" && (
+          <div className="flex justify-center p-4">
+            <h1 className="text-xl font-medium text-red-700">{message}</h1>
+          </div>
+        )}
+
         {usahas &&
           usahas.map((usaha, index) => (
             <div

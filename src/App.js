@@ -21,7 +21,7 @@ function App() {
     <div
       className={`min-h-screen flex flex-col transition-all ease-in-out duration-300 bg-slate-100 ${
         !open ? "md:pl-20" : "md:pl-72"
-      }`}
+      } ${!user.usaha && "md:pl-0"}`}
     >
       <Navbar
         open={open}
@@ -29,12 +29,14 @@ function App() {
         setOpenMobile={setOpenMobile}
         openMobile={openMobile}
       />
-      <Sidebar
-        open={open}
-        openMobile={openMobile}
-        setOpenMobile={setOpenMobile}
-        setTitle={setTitle}
-      />
+      {user.usaha && (
+        <Sidebar
+          open={open}
+          openMobile={openMobile}
+          setOpenMobile={setOpenMobile}
+          setTitle={setTitle}
+        />
+      )}
       <div className="p-5">
         <Breadcrumb title={title} />
         <Outlet />
