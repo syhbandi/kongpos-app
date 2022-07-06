@@ -1,9 +1,11 @@
-import axios from "axios";
+import api from "../../app/api.config";
 
-const URL = "http://misterkong.com/kong_api/pos/api/laporan/biaya";
-
-const getBiaya = async (data) => {
-  const get = await axios.post(URL, data);
+const getBiaya = async (data, token) => {
+  const get = await api.post("/laporan/biaya", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return get.data;
 };
 

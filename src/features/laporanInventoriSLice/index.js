@@ -12,7 +12,8 @@ export const getInventori = createAsyncThunk(
   "laporanInventori/getInventori",
   async (data, thunAPI) => {
     try {
-      return await laporanInventoriAPI.getInventori(data);
+      const token = thunAPI.getState().auth.user.access_token;
+      return await laporanInventoriAPI.getInventori(data, token);
     } catch (error) {
       return thunAPI.rejectWithValue("Ada galat saat mengambil data");
     }
@@ -22,7 +23,8 @@ export const getInventoriCount = createAsyncThunk(
   "laporanInventori/getInventoriCount",
   async (data, thunAPI) => {
     try {
-      return await laporanInventoriAPI.getInventori(data);
+      const token = thunAPI.getState().auth.user.access_token;
+      return await laporanInventoriAPI.getInventori(data, token);
     } catch (error) {
       return thunAPI.rejectWithValue("Ada galat saat mengambil data");
     }

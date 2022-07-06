@@ -16,9 +16,10 @@ import {
 } from "../../features/laporanBiayaSlice";
 
 const Biaya = ({ jenis, sumColumn = [] }) => {
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const initialState = {
-    company_id: "comp2020110310015601",
+    company_id: user.usaha.company_id,
     awal: new Date().toISOString().slice(0, 10),
     akhir: new Date().toISOString().slice(0, 10),
     jenis,
@@ -97,7 +98,7 @@ const Biaya = ({ jenis, sumColumn = [] }) => {
     return () => {
       dispatch(reset());
     };
-  }, [dispatch, jenis]);
+  }, [dispatch, jenis, user]);
 
   return (
     <div className="flex flex-col gap-5 relative">

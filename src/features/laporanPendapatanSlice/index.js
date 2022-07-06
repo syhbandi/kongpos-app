@@ -12,7 +12,8 @@ export const getPendapatan = createAsyncThunk(
   "laporanPendapatan/getPendapatan",
   async (data, thunAPI) => {
     try {
-      return await laporanPendapatanAPI.getPendapatan(data);
+      const token = thunAPI.getState().auth.user.access_token;
+      return await laporanPendapatanAPI.getPendapatan(data, token);
     } catch (error) {
       return thunAPI.rejectWithValue("Ada galat saat mengambil data");
     }
@@ -22,7 +23,8 @@ export const getPendapatanCount = createAsyncThunk(
   "laporanPendapatan/getPendapatanCount",
   async (data, thunAPI) => {
     try {
-      return await laporanPendapatanAPI.getPendapatan(data);
+      const token = thunAPI.getState().auth.user.access_token;
+      return await laporanPendapatanAPI.getPendapatan(data, token);
     } catch (error) {
       return thunAPI.rejectWithValue("Ada galat saat mengambil data");
     }

@@ -16,9 +16,10 @@ import {
 } from "../../features/laporanInventoriSLice";
 
 const Inventori = ({ jenis }) => {
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const initialState = {
-    company_id: "comp2020110310015601",
+    company_id: user.usaha.company_id,
     kd_barang: "",
     kd_divisi: "",
     periode: new Date().toISOString().slice(0, 10),
@@ -105,7 +106,7 @@ const Inventori = ({ jenis }) => {
     return () => {
       dispatch(reset());
     };
-  }, [dispatch, jenis]);
+  }, [dispatch, jenis, user]);
 
   return (
     <div className="flex flex-col gap-5 relative">
