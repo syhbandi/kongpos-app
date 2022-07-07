@@ -37,7 +37,7 @@ function App() {
           setTitle={setTitle}
         />
       )}
-      <div className="p-5">
+      <div className="p-5 bg-blue-700 bg-opacity-5">
         <Breadcrumb title={title} />
         <Outlet />
       </div>
