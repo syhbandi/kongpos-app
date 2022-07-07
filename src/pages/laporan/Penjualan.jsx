@@ -158,17 +158,18 @@ const Penjualan = ({ jenis, sumColumn = [] }) => {
           sumColumn={["Total", ...sumColumn]}
         />
       </div>
-
       {/* loader */}
-      {status === "pending" ? (
+      {status === "pending" && (
         <div className="w-full h-full absolute top-0 left-0 bg-white bg-opacity-90 flex items-center justify-center rounded-lg">
           <div className="text-xl font-bold">Sedang memuat...</div>
         </div>
-      ) : status === "rejected" ? (
+      )}
+
+      {status === "rejected" && (
         <div className="w-full h-full absolute top-0 left-0 bg-white bg-opacity-90 flex items-center justify-center">
           <div className="text-xl font-bold">{message}</div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

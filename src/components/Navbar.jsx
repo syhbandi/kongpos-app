@@ -84,7 +84,7 @@ export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
       >
         <FontAwesomeIcon icon={faStoreAlt} className="mr-3" />
         <div className="font-medium mr-3 hidden md:block">
-          {user.usaha ? user.usaha.nama_usaha : "Pilih Usaha dulu"}
+          {user.usaha ? user.usaha.nama_usaha : "Pilih Usaha"}
         </div>
         <FontAwesomeIcon icon={faCaretDown} />
       </div>

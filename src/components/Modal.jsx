@@ -13,7 +13,7 @@ const Modal = ({ open, setOpen, children, modalHeader }) => {
     return (
       <div
         id="modal"
-        className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 z-[5] overflow-hidden flex items-center justify-center"
+        className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 z-50 overflow-hidden flex items-center justify-center"
         onClick={handleClose}
       >
         {/* dialog */}

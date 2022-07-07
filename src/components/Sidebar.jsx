@@ -10,9 +10,9 @@ const Sidebar = ({ open, openMobile, setOpenMobile, setTitle }) => {
 
   return (
     <div
-      className={`z-[2] fixed top-0 flex flex-col md:left-0 w-72 h-screen bg-white shadow-xl transition-all ease-in-out duration-300 ${
+      className={`fixed top-0 flex flex-col md:left-0 w-72 h-screen bg-white shadow-xl transition-all ease-in-out duration-300 ${
         !open ? "md:w-20" : "md:w-72"
-      } ${!openMobile ? "left-[-100vw]" : "left-0"}`}
+      } ${!openMobile ? "left-[-100vw]" : "left-0 z-[2]"}`}
     >
       {/* title app */}
       <div
