@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import logoKongpos from "../assets/logo-kongpos-app.png";
 import SidebarMenu from "./SidebarMenu";
-import { menus } from "./SidebarMenuData";
+import { menus } from "../dataSource/SidebarMenuData";
 
 const Sidebar = ({ open, openMobile, setOpenMobile, setTitle }) => {
   const [aktif, setAktif] = useState("");
