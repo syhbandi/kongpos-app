@@ -1,7 +1,7 @@
 import api from "../../app/api.config";
 
 const login = async (no_hp, passwd) => {
-  const get = await api.post("auth/login", {
+  const get = await api.post("/auth/login", {
     no_hp,
     passwd,
   });
@@ -15,7 +15,7 @@ const logout = () => {
 };
 
 const getUsahas = async (noHp) => {
-  const usahas = await api.post("login_get_cid", {
+  const usahas = await api.post("/login_get_cid", {
     no_hp: noHp,
   });
 

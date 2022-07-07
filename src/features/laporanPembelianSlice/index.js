@@ -12,7 +12,8 @@ export const getPembelian = createAsyncThunk(
   "laporanPembelian/getPembelian",
   async (data, thunAPI) => {
     try {
-      return await laporanPembelianAPI.getPembelian(data);
+      const token = thunAPI.getState().auth.user.access_token;
+      return await laporanPembelianAPI.getPembelian(data, token);
     } catch (error) {
       return thunAPI.rejectWithValue("Ada galat saat mengambil data");
     }
@@ -22,7 +23,8 @@ export const getPembelianCount = createAsyncThunk(
   "laporanPembelian/getPembelianCount",
   async (data, thunAPI) => {
     try {
-      return await laporanPembelianAPI.getPembelian(data);
+      const token = thunAPI.getState().auth.user.access_token;
+      return await laporanPembelianAPI.getPembelian(data, token);
     } catch (error) {
       return thunAPI.rejectWithValue("Ada galat saat mengambil data");
     }

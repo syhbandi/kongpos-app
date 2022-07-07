@@ -1,9 +1,11 @@
-import axios from "axios";
+import api from "../../app/api.config";
 
-const URL = "http://misterkong.com/kong_api/pos/api/laporan/stok";
-
-const getInventori = async (data) => {
-  const get = await axios.post(URL, data);
+const getInventori = async (data, token) => {
+  const get = await api.post("/laporan/stok", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return get.data;
 };
 
