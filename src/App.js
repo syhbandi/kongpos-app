@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col transition-all ease-in-out duration-300 bg-slate-100 ${
+      className={`min-h-screen flex flex-col transition-all ease-in-out duration-300 bg-blue-700 bg-opacity-10 ${
         !open ? "md:pl-20" : "md:pl-72"
       } ${!user.usaha && "md:pl-0"}`}
     >
@@ -37,7 +37,7 @@ function App() {
           setTitle={setTitle}
         />
       )}
-      <div className="p-5 bg-blue-700 bg-opacity-5">
+      <div className="p-5">
         <Breadcrumb title={title} />
         <Outlet />
       </div>
