@@ -25,6 +25,10 @@ const Login = () => {
     if (user) {
       navigate("/");
     }
+
+    return () => {
+      document.title = "KONGPOS | LOGIN";
+    };
   }, [user, navigate]);
 
   return (
