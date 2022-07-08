@@ -171,7 +171,7 @@ export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
           ? "Anda belum memiliki usaha"
           : null}
 
-        {usahas && usahas.length > 0
+        {status === "fulfilled" && usahas.length > 0
           ? usahas.map((usaha, index) => (
               <div
                 className="font-medium rounded-lg border border-gray-300 p-3 mb-2 cursor-pointer hover:bg-blue-700 hover:shadow-lg hover:text-white duration-200"
