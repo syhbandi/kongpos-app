@@ -25,7 +25,6 @@ export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
   const { status, message, user } = useSelector((state) => state.auth);
 
   const handleGetUsahas = async () => {
-    setUsahas([]);
     setModalUsaha(true);
     const get = await dispatch(getUsahas());
     const usahas = await get.payload;
@@ -168,16 +167,21 @@ export const Navbar = ({ open, openMobile, setOpen, setOpenMobile }) => {
           </div>
         )}
 
-        {usahas &&
-          usahas.map((usaha, index) => (
-            <div
-              className="font-medium rounded-lg border border-gray-300 p-3 mb-2 cursor-pointer hover:bg-blue-700 hover:shadow-lg hover:text-white duration-200"
-              key={index}
-              onClick={() => handlePilihUsaha(usaha)}
-            >
-              {usaha.nama_usaha}
-            </div>
-          ))}
+        {status === "fulfilled" && usahas.length <= 0
+          ? "Anda belum memiliki usaha"
+          : null}
+
+        {status === "fulfilled" && usahas.length > 0
+          ? usahas.map((usaha, index) => (
+              <div
+                className="font-medium rounded-lg border border-gray-300 p-3 mb-2 cursor-pointer hover:bg-blue-700 hover:shadow-lg hover:text-white duration-200"
+                key={index}
+                onClick={() => handlePilihUsaha(usaha)}
+              >
+                {usaha.nama_usaha}
+              </div>
+            ))
+          : null}
       </Modal>
     </div>
   );
