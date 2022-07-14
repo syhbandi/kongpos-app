@@ -24,6 +24,9 @@ import dataLaporanPenjualan from "./dataSource/laporanPenjualan";
 import dataLaporanPembelian from "./dataSource/laporanPembelian";
 import dataLaporanBiaya from "./dataSource/laporanBiaya";
 import dataLaporanPendapatan from "./dataSource/laporanPendapatan";
+import { BuatKontrak } from "./pages/kontrak/BuatKontrak";
+import { DataSupplier } from "./pages/kontrak/DataSupplier";
+import { PermintaanKontrak } from "./pages/kontrak/PermintaanKontrak";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -145,6 +148,14 @@ root.render(
                 </Route>
               </Route>
               <Route path="laba-rugi" element={<LabaRugi />}></Route>
+            </Route>
+            <Route path="kontrak">
+              <Route path="buat-kontrak" element={<BuatKontrak />} />
+              <Route path="data-supplier" element={<DataSupplier />} />
+              <Route
+                path="permintaan-kontrak"
+                element={<PermintaanKontrak />}
+              />
             </Route>
           </Route>
           <Route path="/login" element={<Login />} />

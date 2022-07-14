@@ -8,6 +8,9 @@ import laporanHutangReducer from "../features/laporanHutangSlice";
 import laporanPiutangReducer from "../features/laporanPiutangSlice";
 import laporanInventoriReducer from "../features/laporanInventoriSLice";
 import authReducer from "../features/auth";
+import buatKontrakReducer from "../features/buatKontrak";
+import compareSupplierReducer from "../features/permintaanKontrak";
+import responseContractReducer from "../features/supplierResponseContract";
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +23,8 @@ export const store = configureStore({
     laporanPiutang: laporanPiutangReducer,
     laporanInventori: laporanInventoriReducer,
     auth: authReducer,
+    buatKontrak: buatKontrakReducer,
+    compareSupplier: compareSupplierReducer,
+    responseContract: responseContractReducer,
   },
 });

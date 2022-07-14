@@ -16,6 +16,11 @@ import {
   faCommentsDollar,
   faHandshake,
   faHandHoldingDollar,
+  faPeopleArrowsLeftRight,
+  faPeopleGroup,
+  faPeopleArrows,
+  faPersonCircleCheck,
+  faPersonCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const menus = [
@@ -320,5 +325,22 @@ export const menus = [
     title: "kontrak",
     link: "kontrak",
     icon: faHandshake,
+    subMenu: [
+      {
+        title: "Buat Kontrak",
+        link: "kontrak/buat-kontrak",
+        icon: faPersonCirclePlus,
+      },
+      {
+        title: "Data Supplier",
+        link: "kontrak/data-supplier",
+        icon: faPeopleGroup,
+      },
+      {
+        title: "Permintaan Kontrak",
+        link: "kontrak/permintaan-kontrak",
+        icon: faPeopleArrows,
+      },
+    ],
   },
 ];
