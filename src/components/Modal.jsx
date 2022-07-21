@@ -1,13 +1,29 @@
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const Modal = ({ open, setOpen, children, modalHeader }) => {
+const Modal = ({
+  open,
+  setOpen,
+  children,
+  modalHeader,
+  width,
+  maxHeight,
+  scroll = true,
+}) => {
+  const [forWidth, setWidth] = useState("md:w-[500px]");
+  const [forHeight, setHeight] = useState("max-h-[700px]");
   const handleClose = (e) => {
     if (e.target.id === "modal") {
       setOpen(false);
       return;
     }
   };
+  useEffect(() => {
+    width && setWidth(width);
+    maxHeight && setHeight(maxHeight);
+  });
 
   if (open) {
     return (
@@ -17,14 +33,16 @@ const Modal = ({ open, setOpen, children, modalHeader }) => {
         onClick={handleClose}
       >
         {/* dialog */}
-        <div className="rounded-lg bg-white shadow-lg p-3 w-full md:w-[500px] max-h-[700px] animate-fadeIn overflow-auto mx-5 md:mx-0">
+        <div
+          className={`rounded-lg bg-white shadow-lg p-3 w-full ${forWidth} overflow-hidden animate-fadeIn mx-5 md:mx-0`}
+        >
           <div className="flex items-center justify-between border-b border-gray-300">
             <h1 className="text-xl font-medium">{modalHeader}</h1>
             <button className="text-2xl" onClick={() => setOpen(false)}>
               <FontAwesomeIcon icon={faClose} />
             </button>
           </div>
-          <div className="mt-3">{children}</div>
+          <div className={`mt-3 ${forHeight} overflow-auto`}>{children}</div>
         </div>
       </div>
     );

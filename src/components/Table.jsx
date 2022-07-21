@@ -26,8 +26,6 @@ const Table = (props) => {
     handlePaginate,
     page,
     sumColumn,
-    aksi,
-    conditionValue,
   } = props;
 
   const [order, setOrder] = useState({
@@ -66,39 +64,6 @@ const Table = (props) => {
       style: "currency",
       currency: "IDR",
     }).format(number);
-  };
-
-  const handleAksi = (aksi, conditionValue) => {
-    if (aksi == 1) {
-      // var cth = [];
-      // var val = "";
-      // val = conditionValue.map((value) => (cth = [value.status_response]));
-      var condition = [];
-      condition =
-        conditionValue && conditionValue.length > 0
-          ? // Object.values(conditionValue.map((val) => val.status_response))
-            conditionValue.map((val) => val.status_response[0])
-          : "";
-      console.log(condition);
-      return <td>{condition}</td>;
-      // if (condition === 1) {
-      //   return (
-      //     <td className="px-4 py-3 border border-gray-400">
-      //       <button className="px-4 py-2 rounded-lg bg-blue-700 border border-blue-700 text-white flex items-center gap-3 hover:bg-blue-900 hover:border-blue-900 w-full md:w-fit justify-center">
-      //         <FontAwesomeIcon icon={faFileSignature} />
-      //       </button>
-      //     </td>
-      //   );
-      // } else {
-      //   return (
-      //     <td className="px-4 py-3 border border-gray-400">
-      //       <button className="px-4 py-2 rounded-lg bg-slate-400 border-blue-700 text-white flex items-center gap-3 hover:bg-blue-900 hover:border-blue-900 w-full md:w-fit justify-center">
-      //         <FontAwesomeIcon icon={faFileSignature} />
-      //       </button>
-      //     </td>
-      //   );
-      // }
-    }
   };
 
   useEffect(() => {
@@ -176,11 +141,6 @@ const Table = (props) => {
                   </button>
                 </th>
               ))}
-              {aksi == 1 ? (
-                <th className="border border-gray-400">AKSI</th>
-              ) : (
-                ""
-              )}
             </tr>
           </thead>
           <tbody>
@@ -207,22 +167,6 @@ const Table = (props) => {
                       : result[value]}
                   </td>
                 ))}
-                {handleAksi(aksi, conditionValue)}
-                {/* {conditionValue.map((val) => (
-                  {val.status_response == "," ? (
-                    <td className="px-4 py-3 border border-gray-400">
-                      <button className="px-4 py-2 rounded-lg bg-blue-700 border border-blue-700 text-white flex items-center gap-3 hover:bg-blue-900 hover:border-blue-900 w-full md:w-fit justify-center">
-                        <FontAwesomeIcon icon={faFileSignature} />
-                      </button>
-                    </td>
-                  ) : (
-                    <td className="px-4 py-3 border border-gray-400">
-                      <button className="px-4 py-2 rounded-lg bg-gray-400 border border-blue-700 text-white flex items-center gap-3 hover:bg-blue-900 hover:border-blue-900 w-full md:w-fit justify-center">
-                        <FontAwesomeIcon icon={faFileSignature} />
-                      </button>
-                    </td>
-                  )}
-                ))} */}
               </tr>
             ))}
           </tbody>

@@ -11,6 +11,10 @@ import authReducer from "../features/auth";
 import buatKontrakReducer from "../features/buatKontrak";
 import compareSupplierReducer from "../features/permintaanKontrak";
 import responseContractReducer from "../features/supplierResponseContract";
+import postResponsContractReducer from "../features/supplierResponseContract/postRespontRequest";
+import postRequestContractReducer from "../features/buatKontrak/postRequestContract";
+import getSupplierReduce from "../features/permintaanKontrak/getSupplier";
+import postCompareSupplierReducer from "../features/permintaanKontrak/postCompareSupplier";
 
 export const store = configureStore({
   reducer: {
@@ -26,5 +30,8 @@ export const store = configureStore({
     buatKontrak: buatKontrakReducer,
     compareSupplier: compareSupplierReducer,
     responseContract: responseContractReducer,
+    requestContract: postRequestContractReducer,
+    supplierData: getSupplierReduce,
+    postcompareSupplier: postCompareSupplierReducer,
   },
 });

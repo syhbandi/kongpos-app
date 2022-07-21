@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import compareSupplier from "./permintaanKontrakAPI";
+import { compareSupplier } from "./permintaanKontrakAPI";
 
 const initialState = {
   data: null,

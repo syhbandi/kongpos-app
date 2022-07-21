@@ -9,8 +9,19 @@ const getResponseContract = async (data, token) => {
   return get.data;
 };
 
+const postResponseContract = async (data, token) => {
+  const post = await api.post("/post_customer_respons_contract", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 const responseContract = {
   getResponseContract,
 };
+const postResponse = {
+  postResponseContract,
+};
 
-export default responseContract;
+export { responseContract, postResponse };

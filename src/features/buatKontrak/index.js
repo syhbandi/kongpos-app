@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import customerContract from "./buatKontrakAPI";
+import { customerContract } from "./buatKontrakAPI";
 
 const initialState = {
   data: null,
