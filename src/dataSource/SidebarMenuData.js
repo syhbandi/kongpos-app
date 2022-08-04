@@ -21,6 +21,7 @@ import {
   faPeopleArrows,
   faPersonCircleCheck,
   faPersonCirclePlus,
+  faCodeFork,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const menus = [
@@ -340,6 +341,23 @@ export const menus = [
         title: "Permintaan Kontrak",
         link: "kontrak/permintaan-kontrak",
         icon: faPeopleArrows,
+      },
+      {
+        title: "Mapper Item",
+        link: "mapper",
+        icon: faCodeFork,
+        subMenu: [
+          {
+            title: "Supplier",
+            link: "mapper/supplier",
+            icon: faCircle,
+          },
+          {
+            title: "Customer",
+            link: "mapper/customer",
+            icon: faCircle,
+          },
+        ],
       },
     ],
   },

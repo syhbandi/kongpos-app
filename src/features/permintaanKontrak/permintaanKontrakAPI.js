@@ -22,6 +22,7 @@ const postCompareSupplier = async (data, token) => {
       Authorization: `Bearer ${token}`,
     },
   });
+  return post.data.Pesan;
 };
 
 const compareSupplier = {

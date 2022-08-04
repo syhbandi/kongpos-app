@@ -1,9 +1,4 @@
-import {
-  faFileSignature,
-  faPaperPlane,
-  faQuestion,
-  faSpinner,
-} from "@fortawesome/free-solid-svg-icons";
+import { faFileSignature, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,11 +6,13 @@ import {
   getSupplierResponseCount,
   reset,
 } from "../../features/supplierResponseContract";
-import { postResponsRequest } from "../../features/supplierResponseContract/postRespontRequest";
+import {
+  postResponsRequest,
+  reset as resetResponseRequest,
+} from "../../features/supplierResponseContract/postResponsRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Table from "../../components/Table";
 import Modal from "../../components/Modal";
-import { icon } from "@fortawesome/fontawesome-svg-core";
 import Swal from "sweetalert2";
 import SweetAlert from "../../components/sweetAlert";
 
@@ -38,6 +35,12 @@ export const DataSupplier = () => {
   const { data, status, message, dataCount } = useSelector(
     (state) => state.responseContract
   );
+  const {
+    data: dataResponse,
+    status: statusResponse,
+    message: messageResponse,
+  } = useSelector((state) => state.postResponseRequest);
+
   const handlePaginate = (e) => {
     const jumlahRecord = dataCount ? dataCount["Jumlah Record"] : 0;
     const newOffset = (e.selected * formData.length) % jumlahRecord;
@@ -95,7 +98,7 @@ export const DataSupplier = () => {
 
   function handleModal(value1, value2, value3, value4, value5, value6, value7) {
     // setModal(true);
-    console.log(value1 + value2 + value3 + value4 + value5);
+    // console.log(value1 + value2 + value3 + value4 + value5);
     const dtPostRequest = {
       kd_supplier: value1,
       kd_customer: value2,
@@ -116,12 +119,6 @@ export const DataSupplier = () => {
       cancelButtonText: "Batal",
     }).then((result) => {
       if (result.isConfirmed) {
-        SweetAlert({ message: "Permintaan kontrak berhasil diterima." });
-        // Swal.fire(
-        //   "Berhasil",
-        //   "Permintaan kontrak berhasil diterima.",
-        //   "success"
-        // );
         dispatch(postResponsRequest(dtPostRequest));
       }
     });
@@ -178,6 +175,21 @@ export const DataSupplier = () => {
     }
     setDataSlice(arr);
   }, [data]);
+  useEffect(() => {
+    if (statusResponse === "rejected") {
+      Swal.fire(messageResponse, "Gagal menerima permintaan pesan", "error");
+    }
+    if (statusResponse === "fulfilled") {
+      SweetAlert({
+        message: messageResponse,
+        icon: "success",
+      });
+      setFormData(initialState);
+      dispatch(getSupplierResponse(initialState));
+      dispatch(getSupplierResponseCount({ ...initialState, count_stats: 1 }));
+      dispatch(resetResponseRequest());
+    }
+  }, [statusResponse, messageResponse, dispatch, user]);
 
   return (
     <div className="flex flex-col gap-5 relative">

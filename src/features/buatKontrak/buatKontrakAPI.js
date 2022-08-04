@@ -15,6 +15,26 @@ const postRequestContract = async (data, token) => {
       Authorization: `Bearer ${token}`,
     },
   });
+  return post.data.Pesan;
+};
+
+const getSelectedContracted = async (data, token) => {
+  const get = await api.post("/selected_contracted", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return get.data;
+};
+
+const postPaymentDt = async (data, token) => {
+  const post = await api.post("/post_do_payment", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  // console.log(post);
+  return post.data.Pesan;
 };
 
 const customerContract = {
@@ -24,4 +44,9 @@ const requestContract = {
   postRequestContract,
 };
 
-export { customerContract, requestContract };
+export {
+  customerContract,
+  requestContract,
+  getSelectedContracted,
+  postPaymentDt,
+};

@@ -13,7 +13,7 @@ export const postCompare = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.access_token;
       return await postCompareSupplierDt.postCompareSupplier(data, token);
     } catch (error) {
-      return thunkAPI.rejectWithValue("Ada galat saat mengambil data");
+      return thunkAPI.rejectWithValue(error.response.data.Pesan);
     }
   }
 );
@@ -39,8 +39,8 @@ const postCompareSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(postCompare.fulfilled, (state, action) => {
-        state.data = action.payload;
-        state.status = "";
+        state.message = action.payload;
+        state.status = "fulfilled";
       });
   },
 });

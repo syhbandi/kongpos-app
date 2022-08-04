@@ -7,11 +7,15 @@ import {
   reset,
 } from "../../features/permintaanKontrak";
 import { getSupplierData } from "../../features/permintaanKontrak/getSupplier";
-import { postCompare } from "../../features/permintaanKontrak/postCompareSupplier";
+import {
+  postCompare,
+  reset as resetCompareSupplier,
+} from "../../features/permintaanKontrak/postCompareSupplier";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Table from "../../components/Table";
 import Modal from "../../components/Modal";
 import SweetAlert from "../../components/sweetAlert";
+import Swal from "sweetalert2";
 
 export const PermintaanKontrak = () => {
   const { user } = useSelector((state) => state.auth);
@@ -34,9 +38,16 @@ export const PermintaanKontrak = () => {
   const { dtSupplier, statusSup, messageSup } = useSelector(
     (state) => state.supplierData
   );
+  const {
+    data: dataPostCompare,
+    status: statusPostCompare,
+    message: messagePostCompare,
+  } = useSelector((state) => state.postcompareSupplier);
   const [sendPost, setSendPost] = useState({});
   const [kodeSupplier, setKodeSupplier] = useState("");
   const [modal, setModal] = useState(false);
+  const [disable, setDisable] = useState(false);
+  const [btnSimpan, setBtnSimpan] = useState("simpan");
   const handlePaginate = (e) => {
     const jumlahRecord = dataCount ? dataCount["Jumlah Record"] : 0;
     const newOffset = (e.selected * formData.length) % jumlahRecord;
@@ -93,7 +104,7 @@ export const PermintaanKontrak = () => {
   };
 
   const handleModal = (id_cid_sumber, cid_sumber, cid_tujuan) => {
-    console.log(id_cid_sumber, cid_sumber, cid_tujuan);
+    // console.log(id_cid_sumber, cid_sumber, cid_tujuan);
     setSendPost({
       id_cid_sumber: id_cid_sumber,
       cid_sumber: cid_sumber,
@@ -102,14 +113,20 @@ export const PermintaanKontrak = () => {
     setModal(true);
   };
 
+  // const handleDisable = () => {
+  //   setDisable(true);
+  // };
+
   const handleCheck = (val) => {
     setKodeSupplier(val);
   };
   const handlePostRequest = (e) => {
     e.preventDefault();
-    // setSendPost((prevState) => ({ ...prevState, kd_supplier: kodeSupplier }));
+    setDisable(true);
+    setBtnSimpan("memproses...");
+    document.getElementById("btn-simpan").classList.remove("bg-gray-500");
+    document.getElementById("btn-simpan").classList.add("bg-gray-300");
     dispatch(postCompare({ ...sendPost, kd_supplier: kodeSupplier }));
-    SweetAlert({ message: "Berhasil menambahkan supplier..." });
   };
 
   const pencarian = (e) => {
@@ -137,7 +154,6 @@ export const PermintaanKontrak = () => {
 
   useEffect(() => {
     setFormData(initialState);
-    // console.log(user.usaha.company_id);
     const company_id = {
       comp_id: user.usaha.company_id,
     };
@@ -186,9 +202,26 @@ export const PermintaanKontrak = () => {
     setDataSlice(arr);
   }, [data, dtSupplier]);
 
-  // useEffect(() => {
-  //   supFix && console.log(supFix);
-  // }, [supFix]);
+  useEffect(() => {
+    if (statusPostCompare === "rejected") {
+      Swal.fire(messagePostCompare, "Silahkan pilih Supplier", "error");
+    }
+    if (statusPostCompare === "fulfilled") {
+      SweetAlert({
+        message: messagePostCompare,
+        icon: "success",
+      });
+      setModal(false);
+      setFormData(initialState);
+      const company_id = {
+        comp_id: user.usaha.company_id,
+      };
+      dispatch(getSupplierCompare(initialState));
+      dispatch(getSupplierCompareCount({ ...initialState, count_stats: 1 }));
+      dispatch(getSupplierData(company_id));
+      dispatch(resetCompareSupplier());
+    }
+  }, [statusPostCompare, messagePostCompare, dispatch, user]);
 
   return (
     <div className="flex flex-col gap-5 relative">
@@ -267,9 +300,12 @@ export const PermintaanKontrak = () => {
             <div className="flex items-end justify-end px-3 py-2">
               <button
                 type="submit"
+                id="btn-simpan"
+                // onClick={handleDisable}
+                disabled={disable}
                 className="rounded-sm px-10 py-1 text-white bg-gray-500"
               >
-                Simpan
+                {btnSimpan}
               </button>
             </div>
           </form>

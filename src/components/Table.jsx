@@ -56,14 +56,25 @@ const Table = (props) => {
   };
 
   const formatNumber = (number, currency = false) => {
-    if (!currency) {
+    if (currency === false) {
       return new Intl.NumberFormat("id").format(number);
     }
-
-    return new Intl.NumberFormat("id", {
-      style: "currency",
-      currency: "IDR",
-    }).format(number);
+    if (currency === "") {
+      // return number.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+      return number;
+    }
+    if (currency === true) {
+      return new Intl.NumberFormat("id", {
+        style: "currency",
+        currency: "IDR",
+      }).format(number);
+    }
+  };
+  const current_date = (date) => {
+    let tgl = new Date(date);
+    /* Date format you have */
+    let dateDMY = `${tgl.getDate()}/${tgl.getMonth() + 1}/${tgl.getFullYear()}`;
+    return dateDMY;
   };
 
   useEffect(() => {
@@ -155,15 +166,24 @@ const Table = (props) => {
                 {headers.map((value, index) => (
                   <td
                     className={`px-4 py-3 border border-gray-400 ${
-                      !isNaN(result[value]) ? "text-right" : ""
+                      isNaN(result[value]) || value === "Kode Barang"
+                        ? ""
+                        : "text-right"
                     }`}
                     key={index}
                   >
                     {!isNaN(result[value])
-                      ? formatNumber(
-                          result[value],
-                          value === "Total" ? true : false
-                        )
+                      ? value === "Kode Barang" ||
+                        value === "hp" ||
+                        value === "telepon" ||
+                        value === "Periode (Bulan)"
+                        ? result[value]
+                        : formatNumber(
+                            result[value],
+                            value === "Jumlah Item" || value === "Jumlah Nota"
+                              ? false
+                              : true
+                          )
                       : result[value]}
                   </td>
                 ))}
