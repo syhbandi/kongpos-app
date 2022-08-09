@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { postBarangSatuan } from "../features/itemSupplier/postDataBarangSatuan";
+
 function SliceIntoChunks({
   nama_satuan,
   mbs_status,
@@ -25,42 +28,45 @@ function SliceIntoChunks({
     });
     // setChecked(c);
   });
-  const [checked, setChecked] = useState(false);
-  const handleClickCheck = (key, status) => {
-    console.log(key);
-    // const a = "satuan_" + a_barang + "_" + a_satuan;
-    // a.setAttr
-    if (status === 2) {
-      dt[0].status = 1;
-    } else {
-      dt[0].status = 2;
-    }
-    console.log(dt);
-    // if
-    // if (checked === false) {
-    //   setChecked(true);
-    // }
-    // if (checked === true) {
-    //   setChecked(false);
-    // }
+  const [dataSatuan, setDataSatuan] = useState(dt);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const handleChangeChecked = (e) => {
+    console.log(e.target);
+    // const e.target.id = dataSatuan.findIndex(
+    //   (dt) => dt.kd_satuan === e.target.id
+    // );
+    const dataSatuanNew = [...dataSatuan];
+    dataSatuanNew[e.target.id].status =
+      dataSatuanNew[e.target.id].status === "2" ? "1" : "2";
+    setDataSatuan(dataSatuanNew);
+    dispatch(
+      postBarangSatuan({
+        comp_id: user.usaha.company_id,
+        kd_barang,
+        kd_satuan: dataSatuanNew[e.target.id].kd_satuan,
+        status_barang,
+        mbs_status: dataSatuanNew[e.target.id].status,
+      })
+    );
   };
   useEffect(() => {});
 
   return (
     <>
-      {dt.map((val, index) => {
+      {dataSatuan.map((val, index) => {
         return (
-          <div className="radio">
+          <div className="radio" key={val.kd_satuan}>
             <ul>
               <li>
                 <label>
                   <input
                     type="checkbox"
                     name={kd_barang + "," + val.kd_satuan}
-                    id={"satuan_" + kd_barang + "_" + val.kd_satuan}
+                    id={index}
                     // value={kd_barang + "," + val.kd_satuan + "," + val.status}
-                    checked={val.status === "2" ? true : false || checked}
-                    // checked={checked}
+                    checked={val.status === "2" ? true : false}
                     // onChange={() =>
                     //   handleChecked(
                     //     kd_barang,
@@ -69,7 +75,8 @@ function SliceIntoChunks({
                     //     val.status
                     //   )
                     // }
-                    onClick={() => handleClickCheck(index, val.status)}
+                    onChange={handleChangeChecked}
+                    // onClick={(e) => handleClickCheck(kd_barang, val.kd_satuan)}
                   />
                   {val.satuan + "," + kd_barang + "," + val.kd_satuan}
                 </label>
