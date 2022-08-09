@@ -27,6 +27,7 @@ import dataLaporanPendapatan from "./dataSource/laporanPendapatan";
 import { BuatKontrak } from "./pages/kontrak/BuatKontrak";
 import { DataSupplier } from "./pages/kontrak/DataSupplier";
 import { PermintaanKontrak } from "./pages/kontrak/PermintaanKontrak";
+import ItemSupplier from "./pages/kontrak/ItemSupplier";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -156,6 +157,9 @@ root.render(
                 path="permintaan-kontrak"
                 element={<PermintaanKontrak />}
               />
+              <Route path="mapper">
+                <Route path="item-supplier" element={<ItemSupplier />} />
+              </Route>
             </Route>
           </Route>
           <Route path="/login" element={<Login />} />

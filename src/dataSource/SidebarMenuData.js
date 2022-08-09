@@ -344,17 +344,17 @@ export const menus = [
       },
       {
         title: "Mapper Item",
-        link: "mapper",
+        link: "kontrak/mapper",
         icon: faCodeFork,
         subMenu: [
           {
-            title: "Supplier",
-            link: "mapper/supplier",
+            title: "Item Supplier",
+            link: "kontrak/mapper/item-supplier",
             icon: faCircle,
           },
           {
-            title: "Customer",
-            link: "mapper/customer",
+            title: "Mapping Item",
+            link: "kontrak/mapper/mapping-item",
             icon: faCircle,
           },
         ],
