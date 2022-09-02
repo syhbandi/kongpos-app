@@ -98,7 +98,6 @@ const ItemSupplier = () => {
   };
 
   const handleChecked = (kd_barang, kd_satuan, status_barang, mbs_status) => {
-    // console.log(kd_barang, kd_satuan, status_barang, mbs_status);
     dispatch(
       postBarangSatuan({
         comp_id: user.usaha.company_id,
@@ -108,13 +107,6 @@ const ItemSupplier = () => {
         mbs_status: mbs_status,
       })
     );
-    // setFormData(initialState);
-    // dispatch(getListSupplier(initialState));
-    // dispatch(getListSupplierCount({ ...initialState, count_stats: 1 }));
-  };
-
-  const handleClickCheck = () => {
-    setChecked(true);
   };
 
   useEffect(() => {
@@ -128,16 +120,13 @@ const ItemSupplier = () => {
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       var arr = [];
       var arr_satuan = [];
       var arr_satuan_detail = [];
-      // var array = JSON.parse("[" + data.satuan + "]");
       for (let i = 0; i < data.length; i++) {
         arr_satuan = data[i].satuan.split(",");
         arr_satuan_detail.push(arr_satuan);
-        var a = data[i].satuan;
-        var b = "[" + a + "]";
-        // console.log(b);
         arr.push({
           ...Object.keys(data[i])
             .slice(4, 8)
@@ -153,18 +142,12 @@ const ItemSupplier = () => {
               kd_satuan={data[i].kd_satuan}
               handleChecked={handleChecked}
               status_barang={data[i].status_barang}
-              data={dataSlice}
-              // setChecked={setChecked}
-              // checked={checked}
-              // handleClickCheck={handleClickCheck}
             />
           ),
         });
       }
     }
     setDataSlice(arr);
-
-    // setSatuanSlice(arr_satuan_detail);
   }, [data]);
 
   return (

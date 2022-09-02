@@ -19,6 +19,9 @@ import getContractSelectedReducer from "../features/buatKontrak/getContractSelec
 import postPaymentReducer from "../features/buatKontrak/postPayment";
 import itemSupplierReducer from "../features/itemSupplier";
 import postBarangSatuanReducer from "../features/itemSupplier/postDataBarangSatuan";
+import getListSupplierContractedReducer from "../features/mappingItem/getListSupplier";
+import listItemContractedReducer from "../features/mappingItem/itemContracted";
+import listBarangValidasiReducer from "../features/mappingItem/getValidasiBarang";
 
 export const store = configureStore({
   reducer: {
@@ -42,5 +45,8 @@ export const store = configureStore({
     postResponseRequest: postResponsContractReducer,
     getItemSupplier: itemSupplierReducer,
     postBarangSatuan: postBarangSatuanReducer,
+    getSupplierContracted: getListSupplierContractedReducer,
+    getListItemContracted: listItemContractedReducer,
+    getListBarang: listBarangValidasiReducer,
   },
 });

@@ -166,7 +166,9 @@ const Table = (props) => {
                 {headers.map((value, index) => (
                   <td
                     className={`px-4 py-3 border border-gray-400 ${
-                      isNaN(result[value]) || value === "Kode Barang"
+                      isNaN(result[value]) ||
+                      value === "Kode Barang" ||
+                      value === "merk"
                         ? ""
                         : "text-right"
                     }`}
@@ -176,7 +178,9 @@ const Table = (props) => {
                       ? value === "Kode Barang" ||
                         value === "hp" ||
                         value === "telepon" ||
-                        value === "Periode (Bulan)"
+                        value === "Periode (Bulan)" ||
+                        value === "jumlah" ||
+                        value === "merk"
                         ? result[value]
                         : formatNumber(
                             result[value],

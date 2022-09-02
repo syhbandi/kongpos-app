@@ -8,35 +8,29 @@ function SliceIntoChunks({
   mbs_status,
   kd_barang,
   kd_satuan,
-  handleChecked,
   status_barang,
-  data,
-  // setChecked,
-  // checked,
-  // handleClickCheck,
 }) {
-  nama_satuan = nama_satuan.split(",");
-  mbs_status = mbs_status.split(",");
-  kd_satuan = kd_satuan.split(",");
+  const nama_satuan1 = nama_satuan.split(",");
+  const mbs_status1 = mbs_status.split(",");
+  const kd_satuan1 = kd_satuan.split(",");
 
+  // console.log(kd_satuan1);
   const dt = [];
-  nama_satuan.forEach((val, index) => {
+  nama_satuan1.forEach((val, index) => {
     dt.push({
       satuan: val,
-      status: mbs_status[index],
-      kd_satuan: kd_satuan[index],
+      status: mbs_status1[index],
+      kd_satuan: kd_satuan1[index],
+      kd_barang: kd_barang,
+      status_barang: status_barang,
     });
-    // setChecked(c);
   });
-  const [dataSatuan, setDataSatuan] = useState(dt);
+  const [dataSatuan, setDataSatuan] = useState([]);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleChangeChecked = (e) => {
     console.log(e.target);
-    // const e.target.id = dataSatuan.findIndex(
-    //   (dt) => dt.kd_satuan === e.target.id
-    // );
     const dataSatuanNew = [...dataSatuan];
     dataSatuanNew[e.target.id].status =
       dataSatuanNew[e.target.id].status === "2" ? "1" : "2";
@@ -51,7 +45,9 @@ function SliceIntoChunks({
       })
     );
   };
-  useEffect(() => {});
+  useEffect(() => {
+    setDataSatuan(dt);
+  }, [nama_satuan, mbs_status, kd_barang, kd_satuan, status_barang]);
 
   return (
     <>
@@ -65,18 +61,10 @@ function SliceIntoChunks({
                     type="checkbox"
                     name={kd_barang + "," + val.kd_satuan}
                     id={index}
-                    // value={kd_barang + "," + val.kd_satuan + "," + val.status}
-                    checked={val.status === "2" ? true : false}
-                    // onChange={() =>
-                    //   handleChecked(
-                    //     kd_barang,
-                    //     val.kd_satuan,
-                    //     status_barang,
-                    //     val.status
-                    //   )
-                    // }
+                    checked={
+                      val.status === "2" && status_barang === "2" ? true : false
+                    }
                     onChange={handleChangeChecked}
-                    // onClick={(e) => handleClickCheck(kd_barang, val.kd_satuan)}
                   />
                   {val.satuan + "," + kd_barang + "," + val.kd_satuan}
                 </label>

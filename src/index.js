@@ -28,6 +28,7 @@ import { BuatKontrak } from "./pages/kontrak/BuatKontrak";
 import { DataSupplier } from "./pages/kontrak/DataSupplier";
 import { PermintaanKontrak } from "./pages/kontrak/PermintaanKontrak";
 import ItemSupplier from "./pages/kontrak/ItemSupplier";
+import { MappingItem } from "./pages/kontrak/MappingItem";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -35,7 +36,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/app/pos">
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Dashboard />} />
@@ -159,6 +160,7 @@ root.render(
               />
               <Route path="mapper">
                 <Route path="item-supplier" element={<ItemSupplier />} />
+                <Route path="mapping-item" element={<MappingItem />} />
               </Route>
             </Route>
           </Route>

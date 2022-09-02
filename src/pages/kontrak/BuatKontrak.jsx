@@ -202,7 +202,7 @@ export const BuatKontrak = () => {
     kontrak_id,
     id_customer_config,
   }) => {
-    if (status === 0) {
+    if (status === "0") {
       return (
         <button
           onClick={() =>
@@ -219,14 +219,14 @@ export const BuatKontrak = () => {
         </button>
       );
     }
-    if (status === -2) {
+    if (status === "-2") {
       return (
         <button className="px-4 py-2 rounded-lg bg-blue-700 border border-blue-700 text-white flex items-center gap-3 hover:bg-blue-900 hover:border-blue-900 w-full md:w-fit justify-center">
           <FontAwesomeIcon icon={faSpinner} />{" "}
         </button>
       );
     }
-    if (status === -1) {
+    if (status === "-1") {
       return (
         <button
           onClick={() =>
@@ -243,7 +243,7 @@ export const BuatKontrak = () => {
         </button>
       );
     }
-    if (status === 1) {
+    if (status === "1") {
       return (
         <button className="px-4 py-2 rounded-lg bg-green-600 border border-green-600 text-white flex items-center gap-3 hover:bg-green-900 hover:border-green-900 w-full md:w-fit justify-center">
           <FontAwesomeIcon icon={faChain} />{" "}
@@ -413,21 +413,7 @@ export const BuatKontrak = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="flex items-center gap-5 mb-3 md:mb-0 py-2">
-              <span>Pilih lama kontrak</span>
-              <select
-                id="periode_bulan"
-                onChange={handleChangeLamaKontrak}
-                className="py-2 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-              >
-                {[1, 3, 6, 12].map((value, index) => (
-                  <option key={index} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </select>
-              <span>Bulan</span>
-            </div> */}
+
             <button
               type="submit"
               id="btn-request"
