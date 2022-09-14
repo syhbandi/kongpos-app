@@ -22,6 +22,8 @@ import postBarangSatuanReducer from "../features/itemSupplier/postDataBarangSatu
 import getListSupplierContractedReducer from "../features/mappingItem/getListSupplier";
 import listItemContractedReducer from "../features/mappingItem/itemContracted";
 import listBarangValidasiReducer from "../features/mappingItem/getValidasiBarang";
+import listSatuanReducer from "../features/mappingItem/getSatuanValidasi";
+import postValidasiReducer from "../features/mappingItem/validasi";
 
 export const store = configureStore({
   reducer: {
@@ -48,5 +50,7 @@ export const store = configureStore({
     getSupplierContracted: getListSupplierContractedReducer,
     getListItemContracted: listItemContractedReducer,
     getListBarang: listBarangValidasiReducer,
+    getListSatuan: listSatuanReducer,
+    postValidasi: postValidasiReducer,
   },
 });

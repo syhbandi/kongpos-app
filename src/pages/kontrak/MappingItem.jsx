@@ -110,6 +110,7 @@ export const MappingItem = () => {
 
   const handleChangeSupplier = (e) => {
     const value = e.target.value;
+    // console.log(value);
     const a = value.split("_");
     setFormData((prevstate) => ({
       ...prevstate,
@@ -145,14 +146,15 @@ export const MappingItem = () => {
           ),
           aksi: (
             <SliceButton
-              kd_satuan={dataItem[i].kd_satuan}
+              kd_satuan_supplier={dataItem[i].kd_satuan}
               satuan={dataItem[i].satuan}
               jumlah={dataItem[i].jumlah}
               harga_jual={dataItem[i].harga_jual}
               stats={dataItem[i].stats}
-              kd_barang={dataItem[i].kd_barang}
+              kd_barang_supplier={dataItem[i].kd_barang}
               merk={dataItem[i].merk}
               nama={dataItem[i].nama}
+              kd_supplier={formData.sup_key}
             />
           ),
         });
