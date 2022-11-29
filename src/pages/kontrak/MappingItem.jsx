@@ -49,20 +49,18 @@ export const MappingItem = () => {
     }));
   };
 
-  const handleFilter = (e) => {
-    e.preventDefault();
-    dispatch(
-      getListItemContracted({
-        ...formData,
-      })
-    );
+  const handleFilter = (e = null) => {
+    if (e) {
+      e.preventDefault();
+    }
+    dispatch(getListItemContracted(formData));
     dispatch(
       getListItemContractedCount({
         ...formData,
         count_stats: 1,
       })
     );
-    // console.log(formData);
+    console.log(formData);
     setPage(0);
   };
 
@@ -121,8 +119,14 @@ export const MappingItem = () => {
   };
   useEffect(() => {
     dispatch(getListSupplierA({ comp_id: user.usaha.company_id }));
+    // dispatch(
+    //   getListItemContracted({
+    //     ...formData,
+    //   })
+    // );
     return () => {
       dispatch(reset());
+      dispatch(resetItem());
     };
   }, [dispatch, user]);
   useEffect(() => {
@@ -146,22 +150,26 @@ export const MappingItem = () => {
           ),
           aksi: (
             <SliceButton
-              kd_satuan_supplier={dataItem[i].kd_satuan}
+              satuan_supplier={dataItem[i].kd_satuan}
               satuan={dataItem[i].satuan}
               jumlah={dataItem[i].jumlah}
               harga_jual={dataItem[i].harga_jual}
               stats={dataItem[i].stats}
-              kd_barang_supplier={dataItem[i].kd_barang}
+              barang_supplier={dataItem[i].kd_barang}
               merk={dataItem[i].merk}
               nama={dataItem[i].nama}
               kd_supplier={formData.sup_key}
+              barang_customer={dataItem[i].barang_customer}
+              satuan_customer={dataItem[i].satuan_customer}
+              reload={handleFilter}
             />
           ),
         });
       }
     }
     setDataSlice(arr);
-  }, [dataItem, dataCount]);
+  }, [dataItem]);
+
   return (
     <>
       <div className="flex flex-col gap-5 relative">

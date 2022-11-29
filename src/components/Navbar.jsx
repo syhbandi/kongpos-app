@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsahas, logout, setUsaha } from "../features/auth";
-import Modal from "./Modal";
+import { Modal } from "./Modal";
 import { Menu } from "@headlessui/react";
 import Dropdown from "./Dropdown";
 

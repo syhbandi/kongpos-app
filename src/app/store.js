@@ -1,7 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import MenuReducer from "../features/MenuSlice";
 import laporanPenjualanReducer from "../features/laporanPenjualanSlice";
+import laporanPenjualanOrderReducer from "../features/laporanPenjualanOrderSlice";
+import laporanPenjualanReturReducer from "../features/laporanPenjualanReturSlice";
 import laporanPembelianReducer from "../features/laporanPembelianSlice";
+import laporanPembelianOrderReducer from "../features/laporanPembelianOrderSlice";
+import laporanPembelianReturReducer from "../features/laporanPembelianReturSlice";
 import laporanBiayaReducer from "../features/laporanBiayaSlice";
 import laporanPendapatanReducer from "../features/laporanPendapatanSlice";
 import laporanHutangReducer from "../features/laporanHutangSlice";
@@ -29,7 +33,11 @@ export const store = configureStore({
   reducer: {
     menu: MenuReducer,
     laporanPenjualan: laporanPenjualanReducer,
+    laporanPenjualanOrder: laporanPenjualanOrderReducer,
+    laporanPenjualanRetur: laporanPenjualanReturReducer,
     laporanPembelian: laporanPembelianReducer,
+    laporanPembelianOrder: laporanPembelianOrderReducer,
+    laporanPembelianRetur: laporanPembelianReturReducer,
     laporanBiaya: laporanBiayaReducer,
     laporanPendapatan: laporanPendapatanReducer,
     laporanHutang: laporanHutangReducer,

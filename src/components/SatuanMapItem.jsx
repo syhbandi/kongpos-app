@@ -1,4 +1,5 @@
 import { current } from "@reduxjs/toolkit";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,16 +13,19 @@ export const SatuanMapping = ({
   kd_supplier,
   kd_barang_supplier,
   kd_satuan_supplier,
+  barang_customer,
+  satuan_customer,
 }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  // const { data, status, message } = useSelector((state) => state.getListSatuan);
   const [data, setData] = useState([]);
 
   const [open, setOpen] = useState(false);
 
-  const handleClick = async (kd_barang) => {
+  const handleClick = async (kd_barang, nama) => {
+    // alert(barang_customer + "=" + nama);
     setOpen((current) => !current);
+    // setOpen(true);
     const get = await dispatch(
       getListSatuan({ comp_id: user.usaha.company_id, kd_barang: kd_barang })
     );
@@ -29,11 +33,26 @@ export const SatuanMapping = ({
     setData(res);
   };
 
+  useEffect(() => {
+    // if (barang_customer.match(/val.nama/g)) {
+    //   setOpen(true);
+    //   alert(val.nama);
+    // }
+    // val.nama === barang_customer ? setOpen(true) : setOpen(false);
+  });
+
   return (
     <div>
-      <li onClick={() => handleClick(val.kd_barang)}>{val.nama}</li>
+      <li
+        // onChange={val.nama === barang_customer ? setOpen(true) : setOpen(false)}
+        className="item"
+        onClick={() => handleClick(val.kd_barang, val.nama)}
+      >
+        {val.nama}
+      </li>
       {open && (
         <>
+          {/* ......testing...... */}
           {data?.map((value, index) => (
             <Comp
               key={index}
@@ -44,6 +63,8 @@ export const SatuanMapping = ({
               kd_supplier={kd_supplier}
               kd_barang_supplier={kd_barang_supplier}
               kd_satuan_supplier={kd_satuan_supplier}
+              barang_customer={barang_customer}
+              satuan_customer={satuan_customer}
             />
           ))}
         </>

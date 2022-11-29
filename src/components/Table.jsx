@@ -237,14 +237,14 @@ const Table = (props) => {
             Object.keys(dataCount).map((item, index) => (
               <div className="flex gap-3" key={index}>
                 <span>{item} : </span>
-                <span>
+                {/* <span>
                   {formatNumber(
                     dataCount[item],
                     item.includes("Total") || item.includes("Sisa")
                       ? true
                       : false
                   )}
-                </span>
+                </span> */}
               </div>
             ))}
         </div>

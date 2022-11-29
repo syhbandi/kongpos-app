@@ -18,7 +18,7 @@ import {
 } from "../../features/buatKontrak/postRequestContract";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Table from "../../components/Table";
-import Modal from "../../components/Modal";
+import { Modal } from "../../components/Modal";
 import Swal from "sweetalert2";
 import SweetAlert from "../../components/sweetAlert";
 import { postSelected } from "../../features/buatKontrak/getContractSelected";

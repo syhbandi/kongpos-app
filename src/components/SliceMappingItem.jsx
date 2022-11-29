@@ -1,12 +1,14 @@
 import { useState } from "react";
-import Modal from "./Modal";
+import { Modal, ModalSubmit } from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBan,
   faCheck,
   faCheckCircle,
+  faEye,
   faInfo,
   faInfoCircle,
+  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +17,11 @@ import {
   reset,
 } from "../features/mappingItem/getValidasiBarang";
 import { SatuanMapping } from "./SatuanMapItem";
+import {
+  postDataValidasi,
+  reset as resetValidasi,
+} from "../features/mappingItem/validasi";
+import SweetAlert from "./sweetAlert";
 
 export function Slice({
   satuan,
@@ -25,27 +32,33 @@ export function Slice({
   merk,
   nama,
 }) {
-  satuan = satuan.split(",");
-  jumlah = jumlah.split(",");
-  harga_jual = harga_jual.split(",");
-  stats = stats.split(",");
-
-  const dt = [];
-  satuan.forEach((val, index) => {
-    dt.push({
-      stn: val,
-      jml: jumlah[index],
-      hj: harga_jual[index],
-      sts: stats[index],
-    });
-  });
-  const [data, setData] = useState(dt);
+  const [data, setData] = useState([]);
 
   const currencyFormat = (num) => {
     return parseFloat(num)
       .toFixed(0)
       .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
   };
+
+  useEffect(() => {
+    const setEffect = () => {
+      const satuan_new = satuan.split(",");
+      const jumlah_new = jumlah.split(",");
+      const harga_jual_new = harga_jual.split(",");
+      const stats_new = stats.split(",");
+      const dt = [];
+      satuan_new.forEach((val, index) => {
+        dt.push({
+          stn: val,
+          jml: jumlah_new[index],
+          hj: harga_jual_new[index],
+          sts: stats_new[index],
+        });
+      });
+      setData(dt);
+    };
+    setEffect();
+  }, [stats, satuan, jumlah, harga_jual]);
 
   return (
     <>
@@ -55,19 +68,19 @@ export function Slice({
             <div key={index}>
               <ul>
                 <li>
-                  {val.sts === "1" ? (
-                    <button
-                      type="button"
-                      className="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900"
-                    >
-                      <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon>
-                    </button>
-                  ) : (
+                  {val.sts === "0" ? (
                     <button
                       type="button"
                       className="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900"
                     >
                       <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900"
+                    >
+                      <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon>
                     </button>
                   )}
                   {"Rp " +
@@ -87,58 +100,116 @@ export function Slice({
 }
 
 export function SliceButton({
-  kd_satuan_supplier,
+  satuan_supplier,
   satuan,
   jumlah,
   harga_jual,
   stats,
-  kd_barang_supplier,
+  barang_supplier,
   merk,
   nama,
   kd_supplier,
+  barang_customer,
+  satuan_customer,
+  reload,
 }) {
-  kd_satuan_supplier = kd_satuan_supplier.split(",");
-  satuan = satuan.split(",");
-  jumlah = jumlah.split(",");
-  harga_jual = harga_jual.split(",");
-  stats = stats.split(",");
-
-  const dt = [];
-  satuan.forEach((val, index) => {
-    dt.push({
-      kd_stn: kd_satuan_supplier[index],
-      stn: val,
-      jml: jumlah[index],
-      hj: harga_jual[index],
-      sts: stats[index],
-      kd_brg: kd_barang_supplier,
-      merk_brg: merk,
-      nama_brg: nama,
-    });
-  });
-  const [dataa, setDataa] = useState(dt);
+  const [dataa, setDataa] = useState();
   const [modalRequest, setModalRequest] = useState(false);
-  const [dataUp, setDataUp] = useState({});
+  const [modalDet, setModalDet] = useState(false);
+  const [modalSub, setModalSub] = useState(false);
+  const [data, setData] = useState([]);
+  const [kdStn, setKdStn] = useState([]);
+  const [dataDetail, setDataDetail] = useState([]);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { status, message } = useSelector((state) => state.getListBarang);
-  const [data, setData] = useState([]);
+  const { status: statusValidasi, message: messageValidasi } = useSelector(
+    (state) => state.postValidasi
+  );
 
-  const Modal_up = async (kd_brg_up, kd_stn_up, merk_brg_up, nama_brg_up) => {
+  const ModalUp = async (kd_brg_up, kd_stn_up, merk_brg_up, nama_brg_up) => {
     setModalRequest(true);
     const get = await dispatch(
       getListBarang({ company_id: user.usaha.company_id, nama: nama_brg_up })
     );
     const res = await get.payload;
     setData(res);
+    setKdStn(kd_stn_up);
   };
-
+  const ModalDetail = (barang_cus, satuan_cus, barang_sup, satuan_sup) => {
+    setModalDet(true);
+    setDataDetail({ barang_cus, satuan_cus, barang_sup, satuan_sup });
+  };
+  const Pencarian = async (e) => {
+    const get = await dispatch(
+      getListBarang({ company_id: user.usaha.company_id, nama: e.target.value })
+    );
+    const res = await get.payload;
+    setData(res);
+    console.log(data);
+  };
+  const submitSesuaikan = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const kd_barang_validasi = formData.get("default-radio").split("__")[0];
+    const kd_satuan_validasi = formData.get("default-radio").split("__")[1];
+    const kd_barang_supplier = formData.get("default-radio").split("__")[2];
+    const kd_satuan_supplier = formData.get("default-radio").split("__")[3];
+    const jumlah = formData.get("default-radio").split("__")[4];
+    const kd_supplier_x = formData.get("default-radio").split("__")[5];
+    const kd_supplier = kd_supplier_x.split("_")[0];
+    dispatch(
+      postDataValidasi({
+        comp_id: user.usaha.company_id,
+        user_id: user.usaha.user_id,
+        kd_barang_validasi,
+        kd_satuan_validasi,
+        kd_supplier,
+        kd_barang_supplier,
+        kd_satuan_supplier,
+        jumlah,
+      })
+    );
+    reload();
+    SweetAlert({
+      message: "Berhasil validasi barang kontrak",
+      icon: "success",
+    });
+    setModalRequest(false);
+  };
   useEffect(() => {
     if (!modalRequest) {
       setData(null);
     }
   }, [modalRequest]);
+  useEffect(() => {
+    const setEffect = () => {
+      const satuan_supplier_new = satuan_supplier.split(",");
+      const satuan_new = satuan.split(",");
+      const jumlah_new = jumlah.split(",");
+      const harga_jual_new = harga_jual.split(",");
+      const stats_new = stats.split(",");
+      const satuan_customer_new = satuan_customer.split(",");
 
+      const dt = [];
+      satuan_new.forEach((val, index) => {
+        dt.push({
+          kd_stn: satuan_supplier_new[index],
+          stn: val,
+          jml: jumlah_new[index],
+          hj: harga_jual_new[index],
+          sts: stats_new[index],
+          kd_brg: barang_supplier,
+          merk_brg: merk,
+          nama_brg: nama,
+          brg_customer: barang_customer,
+          stn_customer: satuan_customer_new[index],
+        });
+      });
+      setDataa(dt);
+    };
+    setEffect();
+  }, [satuan_supplier, satuan, jumlah, harga_jual, stats, satuan_customer]);
   return (
     <>
       {dataa &&
@@ -150,7 +221,7 @@ export function SliceButton({
                   <button
                     type="button"
                     onClick={() =>
-                      Modal_up(
+                      ModalUp(
                         val.kd_brg,
                         val.kd_stn,
                         val.merk_brg,
@@ -159,7 +230,21 @@ export function SliceButton({
                     }
                     className="bg-green-100 text-blue-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900"
                   >
-                    Sesuaikan Item
+                    Sesuaikan
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      ModalDetail(
+                        val.brg_customer,
+                        val.stn_customer,
+                        val.nama_brg,
+                        val.stn
+                      )
+                    }
+                    className="bg-green-100 text-blue-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900"
+                  >
+                    <FontAwesomeIcon icon={faEye}></FontAwesomeIcon>
                   </button>
                 </li>
               </ul>
@@ -170,6 +255,7 @@ export function SliceButton({
         open={modalRequest}
         setOpen={setModalRequest}
         modalHeader={"Validasi Produk"}
+        scroll={false}
       >
         {status === "pending" && (
           <div className="flex justify-center p-4">
@@ -192,24 +278,106 @@ export function SliceButton({
           </div>
         )}
         {/* {status === "fulfilled" ? ( */}
-        <div>
-          <div>
-            <ul>
+        <div className="flex flex-col">
+          <div className="flex items-center rounded-lg p-3">
+            <input
+              type="search"
+              id="search"
+              placeholder="Cari"
+              className="w-full md:w-90 outline-0 px-3 py-2 border border-slate-200 rounded-l-md  bg-gray-100 focus:border-cyan-50 focus:bg-white focus:ring focus:ring-cyan-300"
+              onChange={Pencarian}
+            />
+            <button
+              type="button"
+              className="p-3 rounded-r-md bg-gray-100 border border-slate-200 text-black flex items-center"
+            >
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
+          </div>
+          <form onSubmit={submitSesuaikan}>
+            <ul className="flex-grow overflow-auto h-[300px]">
               {data?.map((val, index) => {
                 return (
                   <SatuanMapping
                     key={index}
                     val={val}
                     kd_supplier={kd_supplier}
-                    kd_barang_supplier={kd_barang_supplier}
-                    kd_satuan_supplier={kd_satuan_supplier}
+                    kd_barang_supplier={barang_supplier}
+                    kd_satuan_supplier={kdStn}
+                    barang_customer={barang_customer}
+                    satuan_customer={satuan_customer}
                   />
                 );
               })}
             </ul>
+            <div className="pt-3">
+              <button
+                type="submit"
+                className="px-4 py-2 rounded-lg bg-blue-700 border border-blue-700 text-white flex items-center gap-3 hover:bg-blue-900 hover:border-blue-900 w-full md:w-fit justify-center"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </Modal>
+      <Modal
+        open={modalDet}
+        setOpen={setModalDet}
+        modalHeader={"Detail Nama Produk Supplier & Anda"}
+        scroll={false}
+      >
+        <div className="flex flex-col">
+          <div className="flex items-center rounded-lg p-3">
+            {/* <p>{dataDetail?.barang}</p> */}
+            <table className="w-full border-collapse">
+              <thead className="bg-white select-none">
+                <tr>
+                  <th className="px-4 py-3 border border-gray-400 text-center">
+                    Supplier
+                  </th>
+                  <th className="px-4 py-3 border border-gray-400 text-center">
+                    Customer
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    colSpan="2"
+                    className="border border-gray-400 text-center"
+                  >
+                    Nama Barang
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 border border-gray-400 text-center">
+                    {dataDetail.barang_sup}
+                  </td>
+                  <td className="px-4 py-3 border border-gray-400 text-center">
+                    {dataDetail.barang_cus}
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    colSpan="2"
+                    className="border border-gray-400 text-center"
+                  >
+                    Satuan Barang
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 border border-gray-400 text-center">
+                    {dataDetail.satuan_sup}
+                  </td>
+                  <td className="px-4 py-3 border border-gray-400 text-center">
+                    {dataDetail.satuan_cus}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-        {/* ) : null} */}
       </Modal>
     </>
   );

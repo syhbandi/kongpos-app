@@ -114,6 +114,139 @@ export const menus = [
         ],
       },
       {
+        title: "Penjualan Order",
+        link: "laporan/laporan-penjualan-order",
+        icon: faChartColumn,
+        subMenu: [
+          {
+            title: "Pernota",
+            link: "laporan/laporan-penjualan-order/penjualan-order-pernota",
+            icon: faCircle,
+          },
+          {
+            title: "Percustomer",
+            link: "laporan/laporan-penjualan-order/penjualan-order-percustomer",
+            icon: faCircle,
+          },
+          {
+            title: "Perdivisi",
+            link: "laporan/laporan-penjualan-order/penjualan-order-perdivisi",
+            icon: faCircle,
+          },
+          {
+            title: "Perkas",
+            link: "laporan/laporan-penjualan-order/penjualan-order-perkas",
+            icon: faCircle,
+          },
+
+          {
+            title: "Peruser",
+            link: "laporan/laporan-penjualan-order/penjualan-order-peruser",
+            icon: faCircle,
+          },
+
+          {
+            title: "Perjenis Bayar",
+            link: "laporan/laporan-penjualan-order/penjualan-order-perjenis-bayar",
+            icon: faCircle,
+          },
+          {
+            title: "pervoucher",
+            link: "laporan/laporan-penjualan-order/penjualan-order-pervoucher",
+            icon: faCircle,
+          },
+          {
+            title: "Perhari",
+            link: "laporan/laporan-penjualan-order/penjualan-order-perhari",
+            icon: faCircle,
+          },
+          {
+            title: "Perbulan",
+            link: "laporan/laporan-penjualan-order/penjualan-order-perbulan",
+            icon: faCircle,
+          },
+          {
+            title: "Pertahun",
+            link: "laporan/laporan-penjualan-order/penjualan-order-pertahun",
+            icon: faCircle,
+          },
+          {
+            title: "Perbarang",
+            link: "laporan/laporan-penjualan-order/penjualan-order-perbarang",
+            icon: faCircle,
+          },
+          {
+            title: "Perpegawai",
+            link: "laporan/laporan-penjualan-order/penjualan-order-perpegawai",
+            icon: faCircle,
+          },
+        ],
+      },
+      {
+        title: "Penjualan Retur",
+        link: "laporan/laporan-penjualan-retur",
+        icon: faChartColumn,
+        subMenu: [
+          {
+            title: "Pernota",
+            link: "laporan/laporan-penjualan-retur/penjualan-retur-pernota",
+            icon: faCircle,
+          },
+          {
+            title: "Percustomer",
+            link: "laporan/laporan-penjualan-retur/penjualan-retur-percustomer",
+            icon: faCircle,
+          },
+          {
+            title: "Perdivisi",
+            link: "laporan/laporan-penjualan-retur/penjualan-retur-perdivisi",
+            icon: faCircle,
+          },
+          {
+            title: "Perkas",
+            link: "laporan/laporan-penjualan-retur/penjualan-retur-perkas",
+            icon: faCircle,
+          },
+
+          {
+            title: "Peruser",
+            link: "laporan/laporan-penjualan-retur/penjualan-retur-peruser",
+            icon: faCircle,
+          },
+
+          {
+            title: "Perjenis Bayar",
+            link: "laporan/laporan-penjualan-retur/penjualan-retur-perjenis-bayar",
+            icon: faCircle,
+          },
+          {
+            title: "Perhari",
+            link: "laporan/laporan-penjualan-retur/penjualan-retur-perhari",
+            icon: faCircle,
+          },
+          {
+            title: "Perbulan",
+            link: "laporan/laporan-penjualan-retur/penjualan-retur-perbulan",
+            icon: faCircle,
+          },
+          {
+            title: "Pertahun",
+            link: "laporan/laporan-penjualan-retur/penjualan-retur-pertahun",
+            icon: faCircle,
+          },
+          {
+            title: "Perbarang",
+            link: "laporan/laporan-penjualan-retur/penjualan-retur-perbarang",
+            icon: faCircle,
+          },
+          {
+            title: "Perpegawai",
+            link: "laporan/laporan-penjualan-retur/penjualan-retur-perpegawai",
+            icon: faCircle,
+          },
+        ],
+      },
+      {
         title: "Pembelian",
         link: "laporan/laporan-pembelian-perperiode",
         icon: faShoppingCart,
@@ -166,6 +299,132 @@ export const menus = [
           {
             title: "Pembelian Perbarang Perdivisi",
             link: "laporan/laporan-pembelian-perperiode/pembelian-perbarang-perdivisi",
+            icon: faCircle,
+          },
+        ],
+      },
+      {
+        title: "Pembelian Order",
+        link: "laporan/laporan-pembelian-order",
+        icon: faShoppingCart,
+        subMenu: [
+          {
+            title: "Pernota",
+            link: "laporan/laporan-pembelian-order/pembelian-order-pernota",
+            icon: faCircle,
+          },
+          {
+            title: "Persupplier",
+            link: "laporan/laporan-pembelian-order/pembelian-order-persupplier",
+            icon: faCircle,
+          },
+          {
+            title: "Perdivisi",
+            link: "laporan/laporan-pembelian-order/pembelian-order-perdivisi",
+            icon: faCircle,
+          },
+          {
+            title: "Perkas",
+            link: "laporan/laporan-pembelian-order/pembelian-order-perkas",
+            icon: faCircle,
+          },
+
+          {
+            title: "Peruser",
+            link: "laporan/laporan-pembelian-order/pembelian-order-peruser",
+            icon: faCircle,
+          },
+          {
+            title: "pervoucher",
+            link: "laporan/laporan-pembelian-order/pembelian-order-pervoucher",
+            icon: faCircle,
+          },
+          {
+            title: "Perhari",
+            link: "laporan/laporan-pembelian-order/pembelian-order-perhari",
+            icon: faCircle,
+          },
+          {
+            title: "Perbulan",
+            link: "laporan/laporan-pembelian-order/pembelian-order-perbulan",
+            icon: faCircle,
+          },
+          {
+            title: "Pertahun",
+            link: "laporan/laporan-pembelian-order/pembelian-order-pertahun",
+            icon: faCircle,
+          },
+          {
+            title: "Perbarang",
+            link: "laporan/laporan-pembelian-order/pembelian-order-perbarang",
+            icon: faCircle,
+          },
+          {
+            title: "Perpegawai",
+            link: "laporan/laporan-pembelian-order/pembelian-order-perpegawai",
+            icon: faCircle,
+          },
+        ],
+      },
+      {
+        title: "Pembelian Retur",
+        link: "laporan/laporan-pembelian-retur",
+        icon: faShoppingCart,
+        subMenu: [
+          {
+            title: "Pernota",
+            link: "laporan/laporan-pembelian-retur/pembelian-retur-pernota",
+            icon: faCircle,
+          },
+          {
+            title: "Persupplier",
+            link: "laporan/laporan-pembelian-retur/pembelian-retur-persupplier",
+            icon: faCircle,
+          },
+          {
+            title: "Perdivisi",
+            link: "laporan/laporan-pembelian-retur/pembelian-retur-perdivisi",
+            icon: faCircle,
+          },
+          {
+            title: "Perkas",
+            link: "laporan/laporan-pembelian-retur/pembelian-retur-perkas",
+            icon: faCircle,
+          },
+
+          {
+            title: "Peruser",
+            link: "laporan/laporan-pembelian-retur/pembelian-retur-peruser",
+            icon: faCircle,
+          },
+          {
+            title: "pervoucher",
+            link: "laporan/laporan-pembelian-retur/pembelian-retur-pervoucher",
+            icon: faCircle,
+          },
+          {
+            title: "Perhari",
+            link: "laporan/laporan-pembelian-retur/pembelian-retur-perhari",
+            icon: faCircle,
+          },
+          {
+            title: "Perbulan",
+            link: "laporan/laporan-pembelian-retur/pembelian-retur-perbulan",
+            icon: faCircle,
+          },
+          {
+            title: "Pertahun",
+            link: "laporan/laporan-pembelian-retur/pembelian-retur-pertahun",
+            icon: faCircle,
+          },
+          {
+            title: "Perbarang",
+            link: "laporan/laporan-pembelian-retur/pembelian-retur-perbarang",
+            icon: faCircle,
+          },
+          {
+            title: "Perpegawai",
+            link: "laporan/laporan-pembelian-retur/pembelian-retur-perpegawai",
             icon: faCircle,
           },
         ],

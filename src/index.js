@@ -21,7 +21,11 @@ import Piutang from "./pages/laporan/Piutang";
 import LabaRugi from "./pages/laporan/LabaRugi";
 import Penjualan from "./pages/laporan/Penjualan";
 import dataLaporanPenjualan from "./dataSource/laporanPenjualan";
+import dataLaporanPenjualanOrder from "./dataSource/laporanPenjualanOrder";
+import dataLaporanPenjualanRetur from "./dataSource/laporanPenjualanRetur";
 import dataLaporanPembelian from "./dataSource/laporanPembelian";
+import dataLaporanPembelianOrder from "./dataSource/laporanPembelianOrder";
+import dataLaporanPembelianRetur from "./dataSource/laporanPembelianRetur";
 import dataLaporanBiaya from "./dataSource/laporanBiaya";
 import dataLaporanPendapatan from "./dataSource/laporanPendapatan";
 import { BuatKontrak } from "./pages/kontrak/BuatKontrak";
@@ -29,6 +33,10 @@ import { DataSupplier } from "./pages/kontrak/DataSupplier";
 import { PermintaanKontrak } from "./pages/kontrak/PermintaanKontrak";
 import ItemSupplier from "./pages/kontrak/ItemSupplier";
 import { MappingItem } from "./pages/kontrak/MappingItem";
+import PenjualanOrder from "./pages/laporan/PenjualanOrder";
+import PenjualanRetur from "./pages/laporan/PenjualanRetur";
+import PembelianOrder from "./pages/laporan/PembelianOrder";
+import PembelianRetur from "./pages/laporan/PembelianRetur";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -36,7 +44,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename="/app/pos">
+      <BrowserRouter basename="/m_app/pos">
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Dashboard />} />
@@ -62,6 +70,34 @@ root.render(
                   />
                 ))}
               </Route>
+              <Route path="laporan-penjualan-order">
+                {dataLaporanPenjualanOrder.map((data) => (
+                  <Route
+                    key={data.jenis}
+                    path={data.path}
+                    element={
+                      <PenjualanOrder
+                        jenis={data.jenis}
+                        sumColumn={data.sumColumn}
+                      />
+                    }
+                  />
+                ))}
+              </Route>
+              <Route path="laporan-penjualan-retur">
+                {dataLaporanPenjualanRetur.map((data) => (
+                  <Route
+                    key={data.jenis}
+                    path={data.path}
+                    element={
+                      <PenjualanRetur
+                        jenis={data.jenis}
+                        sumColumn={data.sumColumn}
+                      />
+                    }
+                  />
+                ))}
+              </Route>
               <Route path="laporan-pembelian-perperiode">
                 {dataLaporanPembelian.map((data) => (
                   <Route
@@ -69,6 +105,34 @@ root.render(
                     path={data.path}
                     element={
                       <Pembelian
+                        jenis={data.jenis}
+                        sumColumn={data.sumColumn}
+                      />
+                    }
+                  />
+                ))}
+              </Route>
+              <Route path="laporan-pembelian-order">
+                {dataLaporanPembelianOrder.map((data) => (
+                  <Route
+                    key={data.jenis}
+                    path={data.path}
+                    element={
+                      <PembelianOrder
+                        jenis={data.jenis}
+                        sumColumn={data.sumColumn}
+                      />
+                    }
+                  />
+                ))}
+              </Route>
+              <Route path="laporan-pembelian-retur">
+                {dataLaporanPembelianRetur.map((data) => (
+                  <Route
+                    key={data.jenis}
+                    path={data.path}
+                    element={
+                      <PembelianRetur
                         jenis={data.jenis}
                         sumColumn={data.sumColumn}
                       />
