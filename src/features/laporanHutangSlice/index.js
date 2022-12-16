@@ -65,7 +65,7 @@ const laporanHutangSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(getHutangCount.fulfilled, (state, action) => {
-        state.dataCount = action.payload.jumlah_record;
+        state.dataCount = action.payload;
         state.status = "";
       });
   },

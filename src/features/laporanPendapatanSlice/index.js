@@ -65,7 +65,7 @@ const laporanPendapatanSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(getPendapatanCount.fulfilled, (state, action) => {
-        state.dataCount = action.payload.jumlah_record;
+        state.dataCount = action.payload;
         state.status = "";
       });
   },

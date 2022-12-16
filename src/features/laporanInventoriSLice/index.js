@@ -65,7 +65,7 @@ const laporanInventoriSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(getInventoriCount.fulfilled, (state, action) => {
-        state.dataCount = action.payload.jumlah_record;
+        state.dataCount = action.payload;
         state.status = "";
       });
   },
